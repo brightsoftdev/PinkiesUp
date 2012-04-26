@@ -18,8 +18,13 @@
 	//todo: HUD icon?
 }
 
+@property (nonatomic, readwrite) Athlete *athlete;
+
+
 +(id)init :(int)teamId;
 -(id)init :(int)teamId;
 -(void)update :(float)dt;
+
+
 
 @end

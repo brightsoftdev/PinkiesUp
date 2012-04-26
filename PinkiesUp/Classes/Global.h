@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define PTM_RATIO 32
+#define WORLD_GRAVITY 10.0
+
 /** static class that holds global variables */
 @interface Global : NSObject {
 

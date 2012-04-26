@@ -179,6 +179,17 @@
 		68CBA82C1549D0250032199B /* PlayerIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8241549D0250032199B /* PlayerIcon.png */; };
 		68CBA82D1549D0250032199B /* RedSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8251549D0250032199B /* RedSquare.png */; };
 		68CBA82E1549D0250032199B /* Square.ai in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8261549D0250032199B /* Square.ai */; };
+		68CBA8471549E4960032199B /* harold_0000_eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83D1549E4960032199B /* harold_0000_eye.png */; };
+		68CBA8481549E4960032199B /* harold_0001_mouth.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83E1549E4960032199B /* harold_0001_mouth.png */; };
+		68CBA8491549E4960032199B /* harold_0002_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83F1549E4960032199B /* harold_0002_8.png */; };
+		68CBA84A1549E4960032199B /* harold_0003_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8401549E4960032199B /* harold_0003_7.png */; };
+		68CBA84B1549E4960032199B /* harold_0004_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8411549E4960032199B /* harold_0004_6.png */; };
+		68CBA84C1549E4960032199B /* harold_0005_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8421549E4960032199B /* harold_0005_5.png */; };
+		68CBA84D1549E4960032199B /* harold_0006_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8431549E4960032199B /* harold_0006_4.png */; };
+		68CBA84E1549E4960032199B /* harold_0007_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8441549E4960032199B /* harold_0007_3.png */; };
+		68CBA84F1549E4960032199B /* harold_0008_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8451549E4960032199B /* harold_0008_2.png */; };
+		68CBA8501549E4960032199B /* harold_0009_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8461549E4960032199B /* harold_0009_1.png */; };
+		68CBA85B1549F6430032199B /* GameManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA85A1549F6420032199B /* GameManager.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -525,6 +536,18 @@
 		68CBA8241549D0250032199B /* PlayerIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerIcon.png; sourceTree = "<group>"; };
 		68CBA8251549D0250032199B /* RedSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedSquare.png; sourceTree = "<group>"; };
 		68CBA8261549D0250032199B /* Square.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Square.ai; sourceTree = "<group>"; };
+		68CBA83D1549E4960032199B /* harold_0000_eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0000_eye.png; sourceTree = "<group>"; };
+		68CBA83E1549E4960032199B /* harold_0001_mouth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0001_mouth.png; sourceTree = "<group>"; };
+		68CBA83F1549E4960032199B /* harold_0002_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0002_8.png; sourceTree = "<group>"; };
+		68CBA8401549E4960032199B /* harold_0003_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0003_7.png; sourceTree = "<group>"; };
+		68CBA8411549E4960032199B /* harold_0004_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0004_6.png; sourceTree = "<group>"; };
+		68CBA8421549E4960032199B /* harold_0005_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0005_5.png; sourceTree = "<group>"; };
+		68CBA8431549E4960032199B /* harold_0006_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0006_4.png; sourceTree = "<group>"; };
+		68CBA8441549E4960032199B /* harold_0007_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0007_3.png; sourceTree = "<group>"; };
+		68CBA8451549E4960032199B /* harold_0008_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0008_2.png; sourceTree = "<group>"; };
+		68CBA8461549E4960032199B /* harold_0009_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0009_1.png; sourceTree = "<group>"; };
+		68CBA8591549F6410032199B /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		68CBA85A1549F6420032199B /* GameManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameManager.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1080,6 +1103,8 @@
 				68CBA80C1549CE2E0032199B /* NSMutableArray_Shuffling.mm */,
 				68CBA80D1549CE2E0032199B /* Singleton.h */,
 				68CBA80E1549CE2E0032199B /* Singleton.mm */,
+				68CBA8591549F6410032199B /* GameManager.h */,
+				68CBA85A1549F6420032199B /* GameManager.mm */,
 				68CBA80F1549CE2E0032199B /* StartMenuScene.h */,
 				68CBA8101549CE2E0032199B /* StartMenuScene.mm */,
 				68CBA8111549CE2E0032199B /* Team.h */,
@@ -1091,6 +1116,7 @@
 		68CBA81E1549D0250032199B /* Game Resources */ = {
 			isa = PBXGroup;
 			children = (
+				68CBA83B1549E48C0032199B /* Harold */,
 				68CBA81F1549D0250032199B /* AnimBear.plist */,
 				68CBA8201549D0250032199B /* AnimBear.png */,
 				68CBA8211549D0250032199B /* BlueSquare.png */,
@@ -1101,6 +1127,23 @@
 				68CBA8261549D0250032199B /* Square.ai */,
 			);
 			path = "Game Resources";
+			sourceTree = "<group>";
+		};
+		68CBA83B1549E48C0032199B /* Harold */ = {
+			isa = PBXGroup;
+			children = (
+				68CBA83D1549E4960032199B /* harold_0000_eye.png */,
+				68CBA83E1549E4960032199B /* harold_0001_mouth.png */,
+				68CBA83F1549E4960032199B /* harold_0002_8.png */,
+				68CBA8401549E4960032199B /* harold_0003_7.png */,
+				68CBA8411549E4960032199B /* harold_0004_6.png */,
+				68CBA8421549E4960032199B /* harold_0005_5.png */,
+				68CBA8431549E4960032199B /* harold_0006_4.png */,
+				68CBA8441549E4960032199B /* harold_0007_3.png */,
+				68CBA8451549E4960032199B /* harold_0008_2.png */,
+				68CBA8461549E4960032199B /* harold_0009_1.png */,
+			);
+			name = Harold;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1171,6 +1214,16 @@
 				68CBA82C1549D0250032199B /* PlayerIcon.png in Resources */,
 				68CBA82D1549D0250032199B /* RedSquare.png in Resources */,
 				68CBA82E1549D0250032199B /* Square.ai in Resources */,
+				68CBA8471549E4960032199B /* harold_0000_eye.png in Resources */,
+				68CBA8481549E4960032199B /* harold_0001_mouth.png in Resources */,
+				68CBA8491549E4960032199B /* harold_0002_8.png in Resources */,
+				68CBA84A1549E4960032199B /* harold_0003_7.png in Resources */,
+				68CBA84B1549E4960032199B /* harold_0004_6.png in Resources */,
+				68CBA84C1549E4960032199B /* harold_0005_5.png in Resources */,
+				68CBA84D1549E4960032199B /* harold_0006_4.png in Resources */,
+				68CBA84E1549E4960032199B /* harold_0007_3.png in Resources */,
+				68CBA84F1549E4960032199B /* harold_0008_2.png in Resources */,
+				68CBA8501549E4960032199B /* harold_0009_1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1327,6 +1380,7 @@
 				68CBA81B1549CE2E0032199B /* Singleton.mm in Sources */,
 				68CBA81C1549CE2E0032199B /* StartMenuScene.mm in Sources */,
 				68CBA81D1549CE2E0032199B /* Team.mm in Sources */,
+				68CBA85B1549F6430032199B /* GameManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,6 +1480,7 @@
 				68CBA7FB1549CD1B0032199B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

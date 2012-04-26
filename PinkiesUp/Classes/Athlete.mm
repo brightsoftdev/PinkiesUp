@@ -16,6 +16,8 @@ float const ANIMATION_DELAY_BOUND = 0.2f; //todo: are these global?
 @synthesize bear = _bear;
 @synthesize walkAction = _walkAction;
 @synthesize walkAnim = _walkAnim;
+@synthesize torsoBody;
+
 
 + (id)init {
 	return [[self alloc] init];
@@ -44,8 +46,14 @@ float const ANIMATION_DELAY_BOUND = 0.2f; //todo: are these global?
 	CGSize s = [CCDirector sharedDirector].winSize;
 	self.bear = [CCSprite spriteWithSpriteFrameName:@"bear1.png"];        
 	_bear.position = ccp(s.width/4, s.height/4);
-	[spriteSheet addChild:_bear];
-        
+//	[spriteSheet addChild:_bear];
+    
+    torso = [CCSprite spriteWithFile:@"harold_0009_1.png"];
+    torso.color = ccc3(170,255,102);
+    torso.scale = 0.25f;
+    [self addChild:torso];
+    torsoBody = (b2Body*)[self createBodyForSprite:torso];
+    
     return self;
 }
 
@@ -64,11 +72,9 @@ float const ANIMATION_DELAY_BOUND = 0.2f; //todo: are these global?
 }
 
 - (void)setAnimationSpeed :(float)velocity {
-	float maxVelocity = 100;
-    
-    //JS: commenting out some of this an
-    
-	//using a limit function, (x-c)/x
+//	float maxVelocity = 100;
+//        
+//	//using a limit function, (x-c)/x
 //	self.walkAnim.delay = 0.2f - (velocity / maxVelocity) * 0.2f;
 //	NSLog(@"%f", self.walkAnim.delay);
 //	
@@ -76,13 +82,44 @@ float const ANIMATION_DELAY_BOUND = 0.2f; //todo: are these global?
 //		[_bear stopAction:_walkAction]; // seems okay to run even if already stopped
 //		return;
 //	}
-	
-	//todo: not working. Stops every frame. Need to only update when a certain velocity is reached, divide by sets!
-	// restore original frame?
-	
-	// have to restart action in order to update CCAnimation delay
-	[_bear stopAllActions]; //todo: try stopAction
-	self.walkAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:self.walkAnim restoreOriginalFrame:YES]];
-	[_bear runAction:self.walkAction];
+//	
+//	//todo: not working. Stops every frame. Need to only update when a certain velocity is reached, divide by sets!
+//	// restore original frame?
+//	
+//	// have to restart action in order to update CCAnimation delay
+//	[_bear stopAllActions]; //todo: try stopAction
+//	self.walkAction = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:self.walkAnim restoreOriginalFrame:YES]];
+//	[_bear runAction:self.walkAction];
 }
+
+- (b2Body *) createBodyForSprite: (CCSprite*)sprite {
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+
+    b2Body *body;
+    b2BodyDef boxBodyDef;
+    boxBodyDef.type = b2_dynamicBody;
+    boxBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); 
+    boxBodyDef.userData = self;
+    boxBodyDef.linearDamping = 0.0f;  //adds air resistance to box
+    body = [GameManager sharedGameManager].world->CreateBody(&boxBodyDef);
+        
+    b2PolygonShape platformShape;
+    float height = [sprite boundingBox].size.height/PTM_RATIO/2.0f;
+	platformShape.SetAsBox(height, height);// SetAsBox uses the half width and height (extents)
+	
+	b2FixtureDef fixdef;
+	fixdef.shape = &platformShape;
+	fixdef.density = 2.0f;
+	fixdef.friction = 0.5f;
+	fixdef.restitution = 0.0f;
+	//fixdef.filter.groupIndex = kittyCollisionFilter;
+	body->CreateFixture(&fixdef);
+    
+    return body;
+    
+}
+
+
+
 @end
