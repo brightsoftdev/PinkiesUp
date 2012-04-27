@@ -17,8 +17,8 @@
 	NSMutableArray *currentSequence;
 }
 
-+ (id)init :(int)isTop;
-- (id)init :(int)isTop;
++ (id)init :(BOOL)isTop;
+- (id)init :(BOOL)isTop;
 /** returns 1 upon successful sequence, 0 upon failed sequence, and -1 otherwise */
 - (int)update;
 - (void)reset;

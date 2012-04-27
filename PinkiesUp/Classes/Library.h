@@ -15,6 +15,7 @@
 
 + (int)getNumber;
 + (void)setNumber:(int)number;
++ (int)isPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float)testy;
 
 @end
 

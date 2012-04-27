@@ -20,24 +20,25 @@ float velocity = 0;
 float friction = .99;
 float x = 0; // x value of position //todo: should probably use a distance unit
 
-+(id)init :(int)teamId {
-	return [[self alloc] init :teamId];
++(id)init :(BOOL)isTop {
+	return [[self alloc] init :isTop];
 }
 
--(id)init :(int)teamId {
+-(id)init :(BOOL)isTop {
 	if (!(self = [super init]))
 		return nil;
 	
-	buttonGroup = [ButtonGroup init:teamId];
+	buttonGroup = [ButtonGroup init:isTop];
 	[self addChild:buttonGroup];
 	
 	athlete = [Athlete init];
 	[self addChild:athlete];
     
     CGSize screenSize = [GameManager sharedGameManager].screenSize;
-    if(teamId == 1)//bottom, this is reversed I think
+	
+    if(isTop)
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*3/4.0f/PTM_RATIO), 0);
-    if(teamId == 0)//top
+    else
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*1/4.0f/PTM_RATIO), 0);
     
 	return self;
@@ -51,27 +52,10 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	int isSuccessful = [buttonGroup update]; //returns sequence success or failure
 	
 	if (isSuccessful == 1) {
-		velocity += 25;
         athlete.torsoBody->ApplyLinearImpulse(b2Vec2(25.0f, 0.0f), athlete.torsoBody->GetPosition());
-
 	}
 	else if (isSuccessful == 0) {
-		if (velocity >= 25)
-			velocity -= 25;
+		// slow down athlete
 	}
-	
-	// will likely be replaced by box2d's force
-	x += velocity * dt;
-	
-	//[athlete update :x :velocity];
-	//[hud update :x];
-	
-	velocity *= friction;
-	
-	//[Global setVelocity:velocity];
-	
-	//todo: testing
-    //[Global setNumber:[Global getNumber] + 1];
-    //NSLog(@"number = %d", [Global velocity]);	
 }
 @end

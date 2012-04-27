@@ -20,9 +20,8 @@
 
 @property (nonatomic, readwrite) Athlete *athlete;
 
-
-+(id)init :(int)teamId;
--(id)init :(int)teamId;
++(id)init :(BOOL)isTop;
+-(id)init :(BOOL)isTop;
 -(void)update :(float)dt;
 
 

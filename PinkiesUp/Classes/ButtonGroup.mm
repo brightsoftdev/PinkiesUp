@@ -15,11 +15,11 @@
 @end
 
 @implementation ButtonGroup
-+ (id)init :(int)isTop {
++ (id)init :(BOOL)isTop {
 	return [[self alloc] init:isTop];
 }
 
-- (id)init :(int)isTop {
+- (id)init :(BOOL)isTop {
     if (!(self = [super init]))
 		return nil;
 	
@@ -49,9 +49,11 @@
 	//for (int i = 0; i < buttonsArray.count; i++)
 	//NSLog (@"Element %i = %@", i, [buttonsArray objectAtIndex: i]);
 	
-	for (int i = 0; i < [[self children]count]; i++) {
+	NSUInteger childrenCount = [[self children]count];
+	
+	for (int i = 0; i < childrenCount; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
-		currentButton.positionInSequence = i;
+		currentButton.positionInSequence = isTop ? childrenCount - i - 1 : i;
 	}
 	
 	currentSequencePosition = 0;
@@ -65,9 +67,8 @@
 	// if last button pressed is correct, continue
 	// if last button pressed is not correct, fail
 	// if last button pressed is the last button in the sequence, success
-	
-	// upon success, increase score, reset all buttons
-	// upon failure, decrease score, reset all buttons
+	// reset button group
+	// return if successful
 	
 	int isSuccessful = -1; // 1 is successful, 0 is failure, -1 otherwise
 	

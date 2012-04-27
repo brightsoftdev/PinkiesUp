@@ -45,12 +45,6 @@ static GameManager* _sharedGameManager = nil;
     if (self != nil) {
         // Game Manager initialized
         CCLOG(@"Game Manager Singleton, init");
-		
-
-        
-
-
-
     }
     return self;
 }

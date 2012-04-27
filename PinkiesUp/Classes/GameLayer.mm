@@ -40,10 +40,10 @@
 	hud = [HUD init];
 	[self addChild:hud];
 	
-	topTeam = [Team init:0];
+	topTeam = [Team init:1];
 	[self addChild:topTeam];
 	
-	bottomTeam = [Team init:1];
+	bottomTeam = [Team init:0];
 	[self addChild:bottomTeam];
     
 	// add schedulers (event listeners)
@@ -116,6 +116,7 @@
     [topTeam update: dt];
 	[bottomTeam update: dt];
     
+	// box2d
     int32 velocityIterations = 8;
 	int32 positionIterations = 1;
 	
@@ -136,7 +137,31 @@
     
     topTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,-WORLD_GRAVITY), topTeam.athlete.torsoBody->GetPosition());
     bottomTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,WORLD_GRAVITY), bottomTeam.athlete.torsoBody->GetPosition());
-    
+	
+    // after box2d
+	
+	// check if game is over
+	
+	CGFloat END_OF_TRACK = 900; //screenSize.width - 113;
+	
+	NSLog(@"umm: %f", bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO);
+	
+	if (topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
+		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {
+				
+		// indicate winning player
+		BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO == END_OF_TRACK;
+		NSString *labelString;
+		
+		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!";
+		
+		CCLabelTTF *label = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
+		label.position = ccp(screenSize.width/2, screenSize.height/2);
+		[self addChild:label];
+			
+		// restart
+		[self performSelector:@selector(restart:) withObject:nil afterDelay:5.0]; //todo: need withObject?
+	}
 
 }
 
@@ -158,16 +183,17 @@
     
 }
 
-// on "dealloc" you need to release all your retained objects
-- (void) dealloc
-{
+- (void) dealloc {
+	// box2d
 	delete world;
 	world = NULL;
-	
 	delete m_debugDraw;
     
-	// don't forget to call "super dealloc"
 	[super dealloc];
+}
+
+- (void) restart {
+	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];	
 }
 
 @end

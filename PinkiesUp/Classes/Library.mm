@@ -36,7 +36,7 @@ static int number = 0;
  * @return not sure, hoping 0 or 1
  * @source http://stackoverflow.com/questions/217578/point-in-polygon-aka-hit-test
  */
-+ (int)isPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float) testy {
++ (int)isPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float)testy {
 	int i, j, c = 0;
 	for (i = 0, j = nvert-1; i < nvert; j = i++) {
 		if ( ((verty[i]>testy) != (verty[j]>testy)) &&
