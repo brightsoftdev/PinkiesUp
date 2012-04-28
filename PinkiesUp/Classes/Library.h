@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h";
 
 /** static class that holds common variables and functions */ //todo: should make a C++ library, should actually make a library in Xcode
 @interface Library : NSObject {
@@ -15,7 +16,8 @@
 
 + (int)getNumber;
 + (void)setNumber:(int)number;
-+ (int)isPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float)testy;
++ (int)IsPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float)testy;
++ (void)ccFillPoly :(CGPoint *)poli :(int)points :(BOOL)closePolygon;
 
 @end
 

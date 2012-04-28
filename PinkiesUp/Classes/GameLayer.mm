@@ -33,7 +33,7 @@
     screenSize = [CCDirector sharedDirector].winSize;
     [GameManager sharedGameManager].screenSize = screenSize;
     
-    //box2d
+    // box2d
     [self setupWorld];
 	
 	// add sprites
@@ -144,7 +144,7 @@
 	
 	CGFloat END_OF_TRACK = 900; //screenSize.width - 113;
 	
-	NSLog(@"umm: %f", bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO);
+	//NSLog(@"umm: %f", bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO);
 	
 	if (topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
 		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {

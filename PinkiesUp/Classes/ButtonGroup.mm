@@ -23,7 +23,7 @@
     if (!(self = [super init]))
 		return nil;
 	
-	CGSize size = [CCDirector sharedDirector].winSize;
+	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	// add buttons
 	CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
@@ -32,15 +32,27 @@
 	
 	// iPad's resolution is 1024x768
 	// C++ array ftw
-	CGPoint positionsArrayBottom[5] = {ccp(size.width / 6, 0), ccp(size.width * 2 / 6, 0), ccp(size.width * 3 / 6, 0), ccp(size.width * 4 / 6, 0), ccp(size.width * 5 / 6, 0)};
-	CGPoint positionsArrayTop[5] = {ccp(size.width / 6, size.height), ccp(size.width * 2 / 6, size.height), ccp(size.width * 3 / 6, size.height), ccp(size.width * 4 / 6, size.height), ccp(size.width * 5 / 6, size.height)};
+	CGPoint positionsArrayBottom[5] = {ccp(s.width / 6, 0), ccp(s.width * 2 / 6, 0), ccp(s.width * 3 / 6, 0), ccp(s.width * 4 / 6, 0), ccp(s.width * 5 / 6, 0)};
+	CGPoint positionsArrayTop[5] = {ccp(s.width / 6, s.height), ccp(s.width * 2 / 6, s.height), ccp(s.width * 3 / 6, s.height), ccp(s.width * 4 / 6, s.height), ccp(s.width * 5 / 6, s.height)};
+	
+	CGPoint vertices[4] = { ccp(0,0), ccp(50, 0), ccp(50, 50), ccp(0, 50) };
 	
 	Button *button;
 	for (int i = 0; i < 5; i++) {
-		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture :isTop ? positionsArrayTop[i] : positionsArrayBottom[i]];
+		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture :isTop ? positionsArrayTop[i] : positionsArrayBottom[i] :vertices];
 		button.tag = i;
 		[self addChild:button];
 	}
+	
+	// new buttons by drawing polygons
+	
+	// buttons, beginning from top left and going clockwise
+	// verticies, beginning polygon from top left point and going clockwise
+	// todo: should create some kind of static data structure
+	//CGPoint vertices1[4] = { ccp(0,0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) }
+	//CGPoint vertices2[4] = { ccp(s.width / 3, 0), ccp(s.width * 2 / 3, 0), ccp(s.width / 3, 100), ccp(100, 100) }
+	//CGPoint vertices3[4] = { ccp(0,0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) }
+	//CGPoint vertices4[4] = { ccp(0,0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) }
 		
 	//set sequence
 	

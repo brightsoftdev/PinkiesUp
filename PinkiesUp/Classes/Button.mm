@@ -28,25 +28,46 @@
     return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
-+ (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position {
-    return [[[self alloc] init :offTexture :onTexture :pressedTexture :position] autorelease];
++ (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint[])vertices {
+    return [[[self alloc] init :offTexture :onTexture :pressedTexture :position :vertices] autorelease];
 }
 
-- (id)init:(CCTexture2D *)_offTexture :(CCTexture2D *)_onTexture :(CCTexture2D *)_pressedTexture :(CGPoint)position {
-	if ((self = [super initWithTexture :_offTexture]) ) { //todo: init with texture doesn't actually set the offTexture, unnecessary?
-		offTexture = _offTexture;
-		onTexture = _onTexture;
-		pressedTexture = _pressedTexture;
-		self.position = position;
-		//self.position = ccp(position.x + self.contentSize.width / 2, position.y + self.contentSize.height / 2);
+- (id)init:(CCTexture2D *)_offTexture :(CCTexture2D *)_onTexture :(CCTexture2D *)_pressedTexture :(CGPoint)position :(CGPoint[])_vertices {
+	if (!(self = [super initWithTexture :_offTexture])) //todo: init with texture doesn't actually set the offTexture, unnecessary?
+		return nil;
 		
-		isOn = NO;
-		isPressed = NO;
-		//isEnabled = YES;
-		sequenceWasChecked = NO;
+	offTexture = _offTexture;
+	onTexture = _onTexture;
+	pressedTexture = _pressedTexture;
+	self.position = position;
+	//self.position = ccp(position.x + self.contentSize.width / 2, position.y + self.contentSize.height / 2);
+	
+	isOn = NO;
+	isPressed = NO;
+	//isEnabled = YES;
+	sequenceWasChecked = NO;
+	
+	vertices = _vertices;
+	
+	//NSLog(@"v[0] = %f", ((CGPoint)vertices[1]).x);
 		
-	}
 	return self;
+}
+
+- (void)draw {
+	//overrides draw
+	/*
+	glColor4ub(255, 0, 255, 255);
+	glLineWidth(2);
+	CGPoint vertices2[] = { ccp(30,130), ccp(30,230), ccp(50,200) };
+	ccDrawPoly( vertices2, 3, YES);
+	*/
+	
+	// testing area
+	 glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+	 //CGSize s = CGSizeMake(500, 500);
+	CGPoint vertices2[4] = { ccp(0,0), ccp(50, 0), ccp(50, 50), ccp(0, 50) };
+	 [Library ccFillPoly :vertices2 :4 :YES];
 }
 
 - (void)dealloc {

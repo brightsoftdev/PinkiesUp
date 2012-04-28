@@ -12,6 +12,7 @@
 #import "Box2D.h"
 #import "GLES-Render.h"
 #import "GameManager.h"
+#import "Library.h";
 
 @interface GameLayer : CCLayer {
 	Team *topTeam;

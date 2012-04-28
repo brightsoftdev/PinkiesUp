@@ -28,7 +28,7 @@
 	// add score label
 	scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:64];
 	scoreLabel.position = ccp(s.width / 2 - scoreLabel.contentSize.width / 2, s.height / 2 - scoreLabel.contentSize.width / 2);
-	[self addChild:scoreLabel];
+	//[self addChild:scoreLabel]; //todo: temp
 	
 	// add player icons
 	playerIconTop = [CCSprite spriteWithFile:@"PlayerIcon.png"]; //todo: should draw icon according to color
