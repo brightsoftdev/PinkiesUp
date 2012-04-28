@@ -109,7 +109,10 @@
     if (isPressed || isOn)
 		return NO;
 	
-    if (![self containsTouchLocation:touch])
+	CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+	
+	if (![Library IsPointInPolygon:4 :vertices :location.x :location.y])
 		return NO;
 	
     isPressed = YES;

@@ -46,6 +46,16 @@ static int number = 0;
 	return c;
 }
 
++ (int)IsPointInPolygon :(int)nvert :(CGPoint *)vert :(float)testx :(float)testy {
+	int i, j, c = 0;
+	for (i = 0, j = nvert-1; i < nvert; j = i++) {
+		if ( ((vert[i].y>testy) != (vert[j].y>testy)) &&
+			(testx < (vert[j].x-vert[i].x) * (testy-vert[i].y) / (vert[j].y-vert[i].y) + vert[i].x) )
+			c = !c;
+	}
+	return c;
+}
+
 /** draw a filled polygon to the screen */
 /* example:
 	- (void)draw {

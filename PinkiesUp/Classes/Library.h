@@ -17,6 +17,7 @@
 + (int)getNumber;
 + (void)setNumber:(int)number;
 + (int)IsPointInPolygon :(int)nvert :(float *)vertx :(float *)verty :(float)testx :(float)testy;
++ (int)IsPointInPolygon :(int)nvert :(CGPoint *)vert :(float)testx :(float)testy;
 + (void)ccFillPoly :(CGPoint *)poli :(int)points :(BOOL)closePolygon;
 
 @end

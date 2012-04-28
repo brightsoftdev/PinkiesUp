@@ -32,8 +32,8 @@
 	
 	// iPad's resolution is 1024x768
 	// C++ array ftw
-	CGPoint positionsArrayBottom[5] = {ccp(s.width / 6, 0), ccp(s.width * 2 / 6, 0), ccp(s.width * 3 / 6, 0), ccp(s.width * 4 / 6, 0), ccp(s.width * 5 / 6, 0)};
-	CGPoint positionsArrayTop[5] = {ccp(s.width / 6, s.height), ccp(s.width * 2 / 6, s.height), ccp(s.width * 3 / 6, s.height), ccp(s.width * 4 / 6, s.height), ccp(s.width * 5 / 6, s.height)};
+	//CGPoint positionsArrayBottom[5] = {ccp(s.width / 6, 0), ccp(s.width * 2 / 6, 0), ccp(s.width * 3 / 6, 0), ccp(s.width * 4 / 6, 0), ccp(s.width * 5 / 6, 0)};
+	//CGPoint positionsArrayTop[5] = {ccp(s.width / 6, s.height), ccp(s.width * 2 / 6, s.height), ccp(s.width * 3 / 6, s.height), ccp(s.width * 4 / 6, s.height), ccp(s.width * 5 / 6, s.height)};
 	
 	//CGPoint vertices[4] = { ccp(0,0), ccp(50, 0), ccp(50, 50), ccp(0, 50) };
 	
@@ -58,15 +58,12 @@
 		{ ccp(s.width - 100, s.height - 100), ccp(s.width, s.height), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
 	};
 	
-	
 	Button *button;
 	for (int i = 0; i < 5; i++) {
 		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture /*:isTop ? positionsArrayTop[i] : positionsArrayBottom[i]*/ :isTop ? verticesTop[i] : verticesBottom[i]];
 		button.tag = i;
 		[self addChild:button];
 	}
-	
-
 		
 	//set sequence
 	
