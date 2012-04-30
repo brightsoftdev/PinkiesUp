@@ -51,13 +51,17 @@
 	isPressed = NO;
 	//isEnabled = YES;
 	sequenceWasChecked = NO;
+	
+	//todo: temp
+	color4f = ccc4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1);
 		
 	return self;
 }
 
 - (void)draw { //todo: check function overriding	
 	//glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-	glColor4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1.0f);
+	//glColor4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1.0f);
+	glColor4f(color4f.r, color4f.b, color4f.g, color4f.a);
 	[Library ccFillPoly :vertices :4 :YES];
 }
 

@@ -32,8 +32,7 @@
 }
 
 - (void)update :(int)x :(float)velocity {
-	CGSize s = [CCDirector sharedDirector].winSize;
-	
+	//CGSize s = [CCDirector sharedDirector].winSize;
 	//self.bear.position = ccp(x + s.width/4, self.position.y + s.height/4);
 	//[self setAnimationSpeed:velocity];
 }

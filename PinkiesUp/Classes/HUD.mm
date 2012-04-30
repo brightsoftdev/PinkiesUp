@@ -44,8 +44,8 @@
 
 - (void)update :(int)x {
 	//playerIconBottom.position.x = x; //lesson: goddamnit cocos2d
+	playerIconTop.position = ccp(x + 167, playerIconBottom.position.y);
 	playerIconBottom.position = ccp(x + 167, playerIconBottom.position.y);
-
 	//self.score += velocityDelta;
 }
 

@@ -4,9 +4,7 @@
 
 @implementation NSMutableArray (Shuffling)
 
-- (void)shuffle
-{
-	
+- (void)shuffle {
 	static BOOL seeded = NO;
 	if(!seeded)
 	{

@@ -42,7 +42,7 @@
 	// buttons, from left to right
 	// verticies, beginning polygon from top left point and going clockwise
 	// todo: should create some kind of static data structure	
-	CGPoint verticesBottom[5][4] = {
+	CGPoint bottomVertices[5][4] = {
 		{ ccp(0,0), ccp(100, 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
 		{ ccp(0,0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) },
 		{ ccp(s.width / 3, 0), ccp(s.width * 2 / 3, 0), ccp(s.width * 2 / 3 - 100, 100), ccp(s.width / 3 + 100, 100) },
@@ -50,7 +50,7 @@
 		{ ccp(s.width - 100, 100), ccp(s.width, 0), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
 	};
 	
-	CGPoint verticesTop[5][4] = {
+	CGPoint topVertices[5][4] = {
 		{ ccp(0, s.height), ccp(100, s.height - 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
 		{ ccp(0, s.height), ccp(s.width / 3, s.height), ccp(s.width / 3 + 100, s.height - 100), ccp(100, s.height - 100) },
 		{ ccp(s.width / 3, s.height), ccp(s.width * 2 / 3, s.height), ccp(s.width * 2 / 3 - 100, s.height - 100), ccp(s.width / 3 + 100, s.height - 100) },
@@ -58,9 +58,15 @@
 		{ ccp(s.width - 100, s.height - 100), ccp(s.width, s.height), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
 	};
 	
+	/* use image vs draw?
+	ccColor3B topColors = {}
+	
+	ccColor3B topColors = 
+	*/
+	
 	Button *button;
 	for (int i = 0; i < 5; i++) {
-		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture /*:isTop ? positionsArrayTop[i] : positionsArrayBottom[i]*/ :isTop ? verticesTop[i] : verticesBottom[i]];
+		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture /*:isTop ? positionsArrayTop[i] : positionsArrayBottom[i]*/ :isTop ? topVertices[i] : bottomVertices[i]];
 		button.tag = i;
 		[self addChild:button];
 	}

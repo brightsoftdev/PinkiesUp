@@ -19,8 +19,6 @@ typedef enum tagButtonState {
 } ButtonState;
 */
 
-/** this class was used because CCMenuItemToggle does not expose IsPressed */
-// hmm should double check that http://www.cocos2d-iphone.org/forum/topic/14536
 @interface Button : CCSprite <CCTargetedTouchDelegate> {
 @private
    // ButtonState buttonState;
@@ -28,6 +26,7 @@ typedef enum tagButtonState {
 	CCTexture2D *onTexture;
     CCTexture2D *pressedTexture;
 	CGPoint vertices[4];
+	ccColor4F color4f;
 }
 
 @property(nonatomic, readonly) CGRect rect;

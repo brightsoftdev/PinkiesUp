@@ -16,15 +16,18 @@
 @interface Athlete : CCNode {
     CCSprite *torso;
     b2Body *torsoBody;
-    b2World* world;
+    //b2World* world;
 }
 
-@property (nonatomic, readwrite) b2World *world;
+//@property (nonatomic, readwrite) b2World *world;
 @property (nonatomic, readwrite) b2Body *torsoBody;
 
 + (id)init;
 - (id)init;
 - (void)update :(int)x :(float)velocity;
 - (void)dealloc;
+
+// private
+- (b2Body *) createBodyForSprite: (CCSprite*)sprite;
 
 @end
