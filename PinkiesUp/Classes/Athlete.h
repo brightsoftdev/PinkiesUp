@@ -27,7 +27,4 @@
 - (void)update :(int)x :(float)velocity;
 - (void)dealloc;
 
-// private
-- (b2Body *) createBodyForSprite: (CCSprite*)sprite;
-
 @end

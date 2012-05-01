@@ -10,9 +10,9 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
 #import "RootViewController.h"
 #import "GameLayer.h"
+#import "ReadyScreen.h" //todo: temp
 
 @implementation AppDelegate
 
@@ -112,7 +112,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [GameLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [ReadyScreen scene]];
 }
 
 

@@ -8,11 +8,16 @@
 
 #import "Athlete.h"
 
+@interface Athlete (Private)
+- (b2Body *) createBodyForSprite: (CCSprite*)sprite;
+@end
+
+
 @implementation Athlete
 
 @synthesize torsoBody;
 
-
+#pragma mark overridden functions
 + (id)init {
 	return [[self alloc] init];
 }
@@ -31,16 +36,18 @@
     return self;
 }
 
+- (void)dealloc {
+	[super dealloc];
+}
+
+#pragma mark public functions
 - (void)update :(int)x :(float)velocity {
 	//CGSize s = [CCDirector sharedDirector].winSize;
 	//self.bear.position = ccp(x + s.width/4, self.position.y + s.height/4);
 	//[self setAnimationSpeed:velocity];
 }
 
-- (void)dealloc {
-	[super dealloc];
-}
-
+#pragma mark private functions
 - (b2Body *) createBodyForSprite: (CCSprite*)sprite {
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;

@@ -10,11 +10,9 @@
 #import "Button.h"
 #import "NSMutableArray_Shuffling.h"
 
-@interface ButtonGroup (Private)
-- (void)setRandomSequence;
-@end
-
 @implementation ButtonGroup
+
+#pragma mark overridden functions
 + (id)init :(BOOL)isTop {
 	return [[self alloc] init:isTop];
 }
@@ -90,6 +88,11 @@
 	return self;
 }
 
+- (void)dealloc {
+	[super dealloc];
+}
+
+#pragma mark public functions
 - (int)update {
 	// check if buttons are being pressed in the correct sequence:
 	// if button was pressed, check sequence
@@ -130,6 +133,33 @@
 	
 	return isSuccessful;
 }
+
+//todo: ugly
+- (void) update2 {
+	// enable or disable button upon touch
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		
+		if (currentButton.isOn)
+			currentButton.isEnabled = YES;
+		else
+			currentButton.isEnabled = NO;
+	}
+}
+
+- (int)numberOfEnabledButtons {
+	int i = 0;
+	
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		
+		if (currentButton.isEnabled)
+			i++;
+	}
+	
+	return i;
+}
+
 /*
 - (void)setRandomSequence {
 	// shuffle array http://stackoverflow.com/questions/56648/whats-the-best-way-to-shuffle-an-nsmutablearray
@@ -151,6 +181,7 @@
 }
 */
 
+#pragma mark private functions
 - (void)reset {
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
@@ -168,6 +199,8 @@
 	}
 }
 */
+
+#pragma mark properties
 - (BOOL)isPressed {
 	BOOL b = NO;
 	for (int i = 0; i < [[self children]count]; i++) {

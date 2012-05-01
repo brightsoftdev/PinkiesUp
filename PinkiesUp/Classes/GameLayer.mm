@@ -10,11 +10,6 @@
 #import "HUD.h"
 #import "Team.h";
 
-
-@interface GameLayer (Private)
-//- (void)initPlatforms;
-@end
-
 @implementation GameLayer
 
 +(CCScene *) scene {

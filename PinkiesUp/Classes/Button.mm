@@ -17,17 +17,7 @@
 //@synthesize isEnabled;
 @synthesize sequenceWasChecked;
 
-- (void) reset {
-	isOn = NO;
-	[self setTexture :offTexture];
-	sequenceWasChecked = NO;
-}
-
-- (CGRect)rect {
-    CGSize s = [self.texture contentSize];
-    return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
-}
-
+#pragma mark overridden functions
 + (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture /*:(CGPoint)position*/ :(CGPoint *)vertices {
     return [[[self alloc] init :offTexture :onTexture :pressedTexture /*:position*/ :vertices] autorelease];
 }
@@ -49,7 +39,7 @@
 	
 	isOn = NO;
 	isPressed = NO;
-	//isEnabled = YES;
+	isEnabled = NO;
 	sequenceWasChecked = NO;
 	
 	//todo: temp
@@ -57,38 +47,6 @@
 		
 	return self;
 }
-
-- (void)draw { //todo: check function overriding	
-	//glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-	//glColor4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1.0f);
-	glColor4f(color4f.r, color4f.b, color4f.g, color4f.a);
-	[Library ccFillPoly :vertices :4 :YES];
-}
-
-- (void)dealloc {
-    [offTexture release];
-	[onTexture release];
-    [pressedTexture release];
-    [super dealloc];
-}
-
-- (void)flash {
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-	//[self setColor:(ccc3(255, 255, 255))];
-	[self setTexture:pressedTexture];
-	[self schedule:@selector(unflash) interval:0.5];
-}
-
-// private
-- (void) unflash {
-	[self unschedule:@selector(unflash)];
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-	[self setTexture:offTexture];
-}
-
-// check point in 
-
-// overriden and private functions
 
 - (void)onEnter {
     //if (buttonStatus == kButtonStatusDisabled) return;
@@ -100,10 +58,6 @@
     //if (buttonStatus == kButtonStatusDisabled) return;
     [[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
     [super onExit];
-}
-
-- (BOOL)containsTouchLocation:(UITouch *)touch {
-    return CGRectContainsPoint(self.rect, [self convertTouchToNodeSpaceAR:touch]);
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -125,41 +79,90 @@
     return YES;
 }
 /*
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    // If it weren't for the TouchDispatcher, you would need to keep a reference
-    // to the touch from touchBegan and check that the current touch is the same
-    // as that one.
-    // Actually, it would be even more complicated since in the Cocos dispatcher
-    // you get NSSets instead of 1 UITouch, so you'd need to loop through the set
-    // in each touchXXX method.
-	
-    //if (buttonStatus == kButtonStatusDisabled)
-	//	return;
-	
-	//todo: handle move away
-	
-    if ([self containsTouchLocation:touch])
-		return;
-	
-    isPressed = NO; //todo: test
-    //[self setTexture:offTexture];
-}
-*/
+ - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+ // If it weren't for the TouchDispatcher, you would need to keep a reference
+ // to the touch from touchBegan and check that the current touch is the same
+ // as that one.
+ // Actually, it would be even more complicated since in the Cocos dispatcher
+ // you get NSSets instead of 1 UITouch, so you'd need to loop through the set
+ // in each touchXXX method.
+ 
+ //if (buttonStatus == kButtonStatusDisabled)
+ //	return;
+ 
+ //todo: handle move away
+ 
+ if ([self containsTouchLocation:touch])
+ return;
+ 
+ isPressed = NO; //todo: test
+ //[self setTexture:offTexture];
+ }
+ */
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     //if (buttonStatus == kButtonStatusDisabled)
 	//	return;
 	
 	isPressed = NO;
 	/*
-	if (isOn) {
-		isOn = NO;
-		[self setTexture:offTexture];
-	}
-	*/
+	 if (isOn) {
+	 isOn = NO;
+	 [self setTexture:offTexture];
+	 }*/
 	if (!isOn) {
 		isOn = YES;
 		[self setTexture:onTexture];
 	}
 }
+
+- (void)draw {
+	glColor4f(color4f.r, color4f.b, color4f.g, color4f.a);
+	[Library ccFillPoly :vertices :4 :YES];
+}
+
+- (void)dealloc {
+    [offTexture release];
+	[onTexture release];
+    [pressedTexture release];
+    [super dealloc];
+}
+
+#pragma mark public functions
+- (void)flash {
+	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
+	//[self setColor:(ccc3(255, 255, 255))];
+	[self setTexture:pressedTexture];
+	[self schedule:@selector(unflash) interval:0.5];
+}
+
+#pragma mark private functions
+- (void) reset {
+	isOn = NO;
+	[self setTexture :offTexture];
+	sequenceWasChecked = NO;
+}
+
+- (void) unflash {
+	[self unschedule:@selector(unflash)];
+	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
+	[self setTexture:offTexture];
+}
+
+#pragma mark properties
+- (BOOL)isEnabled {
+	return isEnabled;
+}
+
+- (void)setIsEnabled :(BOOL)_isEnabled{
+	if (_isEnabled) {
+		isEnabled = YES;
+		[self setTexture:onTexture];
+	}
+	else {
+		isEnabled = NO;
+		[self setTexture:offTexture];
+	}
+}
+
 
 @end

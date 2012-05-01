@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A4D20DF154E5B9900B8CE8B /* ReadyScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */; };
 		68CBA6111549CD0F0032199B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6101549CD0F0032199B /* QuartzCore.framework */; };
 		68CBA6131549CD0F0032199B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6121549CD0F0032199B /* OpenGLES.framework */; };
 		68CBA6151549CD0F0032199B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6141549CD0F0032199B /* OpenAL.framework */; };
@@ -157,7 +158,6 @@
 		68CBA7E71549CD1B0032199B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7E61549CD1B0032199B /* main.m */; };
 		68CBA7EA1549CD1B0032199B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7E91549CD1B0032199B /* AppDelegate.mm */; };
 		68CBA7ED1549CD1B0032199B /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7EC1549CD1B0032199B /* RootViewController.m */; };
-		68CBA7F01549CD1B0032199B /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7EF1549CD1B0032199B /* HelloWorldLayer.mm */; };
 		68CBA7F31549CD1B0032199B /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7F21549CD1B0032199B /* GLES-Render.mm */; };
 		68CBA7F61549CD1B0032199B /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA7F51549CD1B0032199B /* blocks.png */; };
 		68CBA8131549CE2E0032199B /* Athlete.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA7FE1549CE2E0032199B /* Athlete.mm */; };
@@ -168,8 +168,6 @@
 		68CBA8181549CE2E0032199B /* HUD.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA8081549CE2E0032199B /* HUD.mm */; };
 		68CBA8191549CE2E0032199B /* Library.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA80A1549CE2E0032199B /* Library.mm */; };
 		68CBA81A1549CE2E0032199B /* NSMutableArray_Shuffling.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA80C1549CE2E0032199B /* NSMutableArray_Shuffling.mm */; };
-		68CBA81B1549CE2E0032199B /* Singleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA80E1549CE2E0032199B /* Singleton.mm */; };
-		68CBA81C1549CE2E0032199B /* StartMenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA8101549CE2E0032199B /* StartMenuScene.mm */; };
 		68CBA81D1549CE2E0032199B /* Team.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68CBA8121549CE2E0032199B /* Team.mm */; };
 		68CBA8271549D0250032199B /* AnimBear.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA81F1549D0250032199B /* AnimBear.plist */; };
 		68CBA8281549D0250032199B /* AnimBear.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8201549D0250032199B /* AnimBear.png */; };
@@ -193,6 +191,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A4D20DD154E5B9900B8CE8B /* ReadyScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadyScreen.h; sourceTree = "<group>"; };
+		5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadyScreen.m; sourceTree = "<group>"; };
 		68CBA60C1549CD0F0032199B /* PinkiesUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinkiesUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68CBA6101549CD0F0032199B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68CBA6121549CD0F0032199B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -500,8 +500,6 @@
 		68CBA7E91549CD1B0032199B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		68CBA7EB1549CD1B0032199B /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		68CBA7EC1549CD1B0032199B /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		68CBA7EE1549CD1B0032199B /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		68CBA7EF1549CD1B0032199B /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		68CBA7F11549CD1B0032199B /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		68CBA7F21549CD1B0032199B /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		68CBA7F41549CD1B0032199B /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
@@ -522,10 +520,6 @@
 		68CBA80A1549CE2E0032199B /* Library.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Library.mm; sourceTree = "<group>"; };
 		68CBA80B1549CE2E0032199B /* NSMutableArray_Shuffling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArray_Shuffling.h; sourceTree = "<group>"; };
 		68CBA80C1549CE2E0032199B /* NSMutableArray_Shuffling.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NSMutableArray_Shuffling.mm; sourceTree = "<group>"; };
-		68CBA80D1549CE2E0032199B /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
-		68CBA80E1549CE2E0032199B /* Singleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Singleton.mm; sourceTree = "<group>"; };
-		68CBA80F1549CE2E0032199B /* StartMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenuScene.h; sourceTree = "<group>"; };
-		68CBA8101549CE2E0032199B /* StartMenuScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StartMenuScene.mm; sourceTree = "<group>"; };
 		68CBA8111549CE2E0032199B /* Team.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Team.h; sourceTree = "<group>"; };
 		68CBA8121549CE2E0032199B /* Team.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Team.mm; sourceTree = "<group>"; };
 		68CBA81F1549D0250032199B /* AnimBear.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnimBear.plist; sourceTree = "<group>"; };
@@ -608,8 +602,6 @@
 				68CBA7E91549CD1B0032199B /* AppDelegate.mm */,
 				68CBA7EB1549CD1B0032199B /* RootViewController.h */,
 				68CBA7EC1549CD1B0032199B /* RootViewController.m */,
-				68CBA7EE1549CD1B0032199B /* HelloWorldLayer.h */,
-				68CBA7EF1549CD1B0032199B /* HelloWorldLayer.mm */,
 				68CBA7F11549CD1B0032199B /* GLES-Render.h */,
 				68CBA7F21549CD1B0032199B /* GLES-Render.mm */,
 				68CBA7F41549CD1B0032199B /* GameConfig.h */,
@@ -1101,14 +1093,12 @@
 				68CBA80A1549CE2E0032199B /* Library.mm */,
 				68CBA80B1549CE2E0032199B /* NSMutableArray_Shuffling.h */,
 				68CBA80C1549CE2E0032199B /* NSMutableArray_Shuffling.mm */,
-				68CBA80D1549CE2E0032199B /* Singleton.h */,
-				68CBA80E1549CE2E0032199B /* Singleton.mm */,
 				68CBA8591549F6410032199B /* GameManager.h */,
 				68CBA85A1549F6420032199B /* GameManager.mm */,
-				68CBA80F1549CE2E0032199B /* StartMenuScene.h */,
-				68CBA8101549CE2E0032199B /* StartMenuScene.mm */,
 				68CBA8111549CE2E0032199B /* Team.h */,
 				68CBA8121549CE2E0032199B /* Team.mm */,
+				5A4D20DD154E5B9900B8CE8B /* ReadyScreen.h */,
+				5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1367,7 +1357,6 @@
 				68CBA7E71549CD1B0032199B /* main.m in Sources */,
 				68CBA7EA1549CD1B0032199B /* AppDelegate.mm in Sources */,
 				68CBA7ED1549CD1B0032199B /* RootViewController.m in Sources */,
-				68CBA7F01549CD1B0032199B /* HelloWorldLayer.mm in Sources */,
 				68CBA7F31549CD1B0032199B /* GLES-Render.mm in Sources */,
 				68CBA8131549CE2E0032199B /* Athlete.mm in Sources */,
 				68CBA8141549CE2E0032199B /* Button.mm in Sources */,
@@ -1377,10 +1366,9 @@
 				68CBA8181549CE2E0032199B /* HUD.mm in Sources */,
 				68CBA8191549CE2E0032199B /* Library.mm in Sources */,
 				68CBA81A1549CE2E0032199B /* NSMutableArray_Shuffling.mm in Sources */,
-				68CBA81B1549CE2E0032199B /* Singleton.mm in Sources */,
-				68CBA81C1549CE2E0032199B /* StartMenuScene.mm in Sources */,
 				68CBA81D1549CE2E0032199B /* Team.mm in Sources */,
 				68CBA85B1549F6430032199B /* GameManager.mm in Sources */,
+				5A4D20DF154E5B9900B8CE8B /* ReadyScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

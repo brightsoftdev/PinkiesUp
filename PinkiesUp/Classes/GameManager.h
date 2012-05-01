@@ -19,8 +19,6 @@
 @property (readwrite) b2World *world;
 @property (readwrite) CGSize screenSize;
 
-
-
 +(GameManager*)sharedGameManager;                                  
 
 @end

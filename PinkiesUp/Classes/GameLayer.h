@@ -17,13 +17,12 @@
 @interface GameLayer : CCLayer {
 	Team *topTeam;
 	Team *bottomTeam;
-	HUD *hud; // todo: best practice? use this to keep reference to HUD vs getChildByTag
+	HUD *hud;
     b2World* world;
 	GLESDebugDraw *m_debugDraw;
     CGSize screenSize;
 }
 
-// returns a CCScene that contains the GameLayer as the only child
 +(CCScene *) scene;
 -(void) setupWorld;
 
