@@ -56,7 +56,7 @@
 	int bottom = [bottomButtonGroup numberOfEnabledButtons];
 	int top = [topButtonGroup numberOfEnabledButtons];
 	
-	NSLog(@"%i, %i", bottom, top);
+	//NSLog(@"%i, %i", bottom, top);
 	
 	if ([bottomButtonGroup numberOfEnabledButtons] > 2 && [topButtonGroup numberOfEnabledButtons] > 2) {
 		// show menuItem

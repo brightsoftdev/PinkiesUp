@@ -24,25 +24,37 @@
 	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	// add buttons
-	CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
+	// todo: this should be done outside of the class
+	//CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
 	CCTexture2D *buttonOnTexture = [[CCTextureCache sharedTextureCache] addImage:@"BlueSquare.png"];
 	CCTexture2D *buttonPressedTexture = [[CCTextureCache sharedTextureCache] addImage:@"GreenSquare.png"];
 	
+	CCTexture2D* bottomTextures[5] = {
+		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton1.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton2.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton3.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton4.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton5.png"]
+	};
+	
+	CCTexture2D* topTextures[5] = {
+		[[CCTextureCache sharedTextureCache] addImage:@"TopButton1.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"TopButton2.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"TopButton3.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"TopButton4.png"],
+		[[CCTextureCache sharedTextureCache] addImage:@"TopButton5.png"]
+	};
+	
 	// iPad's resolution is 1024x768
 	// C++ array ftw
-	//CGPoint positionsArrayBottom[5] = {ccp(s.width / 6, 0), ccp(s.width * 2 / 6, 0), ccp(s.width * 3 / 6, 0), ccp(s.width * 4 / 6, 0), ccp(s.width * 5 / 6, 0)};
-	//CGPoint positionsArrayTop[5] = {ccp(s.width / 6, s.height), ccp(s.width * 2 / 6, s.height), ccp(s.width * 3 / 6, s.height), ccp(s.width * 4 / 6, s.height), ccp(s.width * 5 / 6, s.height)};
-	
-	//CGPoint vertices[4] = { ccp(0,0), ccp(50, 0), ccp(50, 50), ccp(0, 50) };
-	
-	// new buttons by drawing polygons
 	
 	// buttons, from left to right
-	// verticies, beginning polygon from top left point and going clockwise
-	// todo: should create some kind of static data structure	
+	// vertices, beginning polygon from top left point and going clockwise
+	
+	// vertices using screen coordinates
 	CGPoint bottomVertices[5][4] = {
-		{ ccp(0,0), ccp(100, 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
-		{ ccp(0,0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) },
+		{ ccp(0, 0), ccp(100, 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
+		{ ccp(0, 0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) },
 		{ ccp(s.width / 3, 0), ccp(s.width * 2 / 3, 0), ccp(s.width * 2 / 3 - 100, 100), ccp(s.width / 3 + 100, 100) },
 		{ ccp(s.width * 2 / 3, 0), ccp(s.width, 0), ccp(s.width - 100, 100), ccp(s.width * 2 / 3 - 100, 100) },
 		{ ccp(s.width - 100, 100), ccp(s.width, 0), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
@@ -55,16 +67,47 @@
 		{ ccp(s.width * 2 / 3, s.height), ccp(s.width, s.height), ccp(s.width - 100, s.height - 100), ccp(s.width * 2 / 3 - 100, s.height - 100) },
 		{ ccp(s.width - 100, s.height - 100), ccp(s.width, s.height), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
 	};
+		
+	CGPoint bottomPositions[5] = {
+		ccp(0, s.height / 2),
+		ccp(0, 100),
+		ccp(s.width / 3, 100),
+		ccp(s.width * 2 / 3, 100),
+		ccp(s.width - 100, s.height / 2)
+	};
 	
-	/* use image vs draw?
-	ccColor3B topColors = {}
+	CGPoint topPositions[5] = {
+		ccp(0, s.height),
+		ccp(0, s.height),
+		ccp(s.width / 3, s.height),
+		ccp(s.width * 2 / 3, s.height),
+		ccp(s.width - 100, s.height)
+	};
+	/*
+	// vertices relative to sprite's position
+	CGPoint bottomVertices[5][4] = {
+		{ ccp(0, 0), ccp(100, 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
+		{ ccp(0, 0), ccp(s.width / 3, 0), ccp(s.width / 3 + 100, 100), ccp(100, 100) },
+		{ ccp(s.width / 3, 0), ccp(s.width * 2 / 3, 0), ccp(s.width * 2 / 3 - 100, 100), ccp(s.width / 3 + 100, 100) },
+		{ ccp(s.width * 2 / 3, 0), ccp(s.width, 0), ccp(s.width - 100, 100), ccp(s.width * 2 / 3 - 100, 100) },
+		{ ccp(s.width - 100, 100), ccp(s.width, 0), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
+	};
 	
-	ccColor3B topColors = 
+	CGPoint topVertices[5][4] = {
+		{ ccp(0, s.height), ccp(100, s.height - 100), ccp(100, s.height / 2), ccp(0, s.height / 2) },
+		{ ccp(0, s.height), ccp(s.width / 3, s.height), ccp(s.width / 3 + 100, s.height - 100), ccp(100, s.height - 100) },
+		{ ccp(s.width / 3, s.height), ccp(s.width * 2 / 3, s.height), ccp(s.width * 2 / 3 - 100, s.height - 100), ccp(s.width / 3 + 100, s.height - 100) },
+		{ ccp(s.width * 2 / 3, s.height), ccp(s.width, s.height), ccp(s.width - 100, s.height - 100), ccp(s.width * 2 / 3 - 100, s.height - 100) },
+		{ ccp(s.width - 100, s.height - 100), ccp(s.width, s.height), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
+	};
 	*/
 	
 	Button *button;
 	for (int i = 0; i < 5; i++) {
-		button = [Button init :buttonOffTexture :buttonOnTexture :buttonPressedTexture /*:isTop ? positionsArrayTop[i] : positionsArrayBottom[i]*/ :isTop ? topVertices[i] : bottomVertices[i]];
+		button = [Button init :isTop ? topTextures[i] : bottomTextures[i] //buttonOffTexture
+							  :buttonOnTexture :buttonPressedTexture
+							  :isTop ? topPositions[i] : bottomPositions[i]
+							  :isTop ? topVertices[i] : bottomVertices[i]];
 		button.tag = i;
 		[self addChild:button];
 	}

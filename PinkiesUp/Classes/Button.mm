@@ -18,19 +18,22 @@
 @synthesize sequenceWasChecked;
 
 #pragma mark overridden functions
-+ (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture /*:(CGPoint)position*/ :(CGPoint *)vertices {
-    return [[[self alloc] init :offTexture :onTexture :pressedTexture /*:position*/ :vertices] autorelease];
++ (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *)vertices {
+    return [[[self alloc] init :offTexture :onTexture :pressedTexture :position :vertices] autorelease];
 }
 
-- (id)init:(CCTexture2D *)_offTexture :(CCTexture2D *)_onTexture :(CCTexture2D *)_pressedTexture /*:(CGPoint)position*/ :(CGPoint *)_vertices {
-	if (!(self = [super initWithTexture :_offTexture])) //todo: init with texture doesn't actually set the offTexture, unnecessary?
+- (id)init:(CCTexture2D *)_offTexture :(CCTexture2D *)_onTexture :(CCTexture2D *)_pressedTexture :(CGPoint)position :(CGPoint *)_vertices {
+	if (!(self = [super initWithTexture :_offTexture]))
 		return nil;
 	
 	offTexture = _offTexture;
 	onTexture = _onTexture;
 	pressedTexture = _pressedTexture;
-	//self.position = position;
-	self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2); //todo: remove this when the initWithTexture is removed
+	self.position = position;
+	//NSLog(@"%f, %f, %f, %f", position.x, position.y, self.contentSize.width, self.contentSize.height);
+	//self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2); //todo: remove this when the initWithTexture is removed
+	self.position = ccp(position.x + self.contentSize.width / 2, position.y - self.contentSize.height / 2); // todo: oops, used top left vertex, instead of bottom left
+	
 	
 	// copy array
 	for (int i = 0; i < 4; i++) {
@@ -41,6 +44,8 @@
 	isPressed = NO;
 	isEnabled = NO;
 	sequenceWasChecked = NO;
+		  
+	//[self setTexture:_offTexture];
 	
 	//todo: temp
 	color4f = ccc4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1);
@@ -114,12 +119,12 @@
 		[self setTexture:onTexture];
 	}
 }
-
+/*
 - (void)draw {
 	glColor4f(color4f.r, color4f.b, color4f.g, color4f.a);
 	[Library ccFillPoly :vertices :4 :YES];
 }
-
+*/
 - (void)dealloc {
     [offTexture release];
 	[onTexture release];
