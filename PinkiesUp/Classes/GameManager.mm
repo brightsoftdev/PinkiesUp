@@ -10,10 +10,9 @@
 
 
 @implementation GameManager
+
 static GameManager* _sharedGameManager = nil;                      
-
 @synthesize world, screenSize;
-
 
 +(GameManager*)sharedGameManager 
 {
@@ -27,7 +26,6 @@ static GameManager* _sharedGameManager = nil;
     return nil; 
 }
 
-
 +(id)alloc 
 {
     @synchronized ([GameManager class])                          
@@ -38,7 +36,6 @@ static GameManager* _sharedGameManager = nil;
     }
     return nil;  
 }
-
 
 -(id)init {                                                      
     self = [super init];

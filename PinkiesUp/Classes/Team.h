@@ -18,12 +18,10 @@
 	//todo: HUD icon?
 }
 
-@property (nonatomic, readwrite) Athlete *athlete;
+@property (nonatomic, readwrite, retain) Athlete *athlete;
 
 +(id)init :(BOOL)isTop;
 -(id)init :(BOOL)isTop;
 -(void)update :(float)dt;
-
-
 
 @end

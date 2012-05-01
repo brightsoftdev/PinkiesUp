@@ -67,7 +67,7 @@
 		{ ccp(s.width * 2 / 3, s.height), ccp(s.width, s.height), ccp(s.width - 100, s.height - 100), ccp(s.width * 2 / 3 - 100, s.height - 100) },
 		{ ccp(s.width - 100, s.height - 100), ccp(s.width, s.height), ccp(s.width, s.height / 2), ccp(s.width - 100, s.height / 2) }
 	};
-		
+	/*	
 	CGPoint bottomPositions[5] = {
 		ccp(0, s.height / 2),
 		ccp(0, 100),
@@ -83,6 +83,24 @@
 		ccp(s.width * 2 / 3, s.height),
 		ccp(s.width - 100, s.height)
 	};
+	 
+	*/
+	CGPoint bottomPositions[5] = {
+		ccp(0, 384),
+		ccp(0, 113),
+		ccp(333, 113),
+		ccp(635, 113),
+		ccp(904, 384)
+	};
+	
+	CGPoint topPositions[5] = {
+		ccp(0, 739),
+		ccp(0, s.height),
+		ccp(333, s.height),
+		ccp(635, s.height),
+		ccp(899, 743)
+	};
+	
 	/*
 	// vertices relative to sprite's position
 	CGPoint bottomVertices[5][4] = {
@@ -104,8 +122,9 @@
 	
 	Button *button;
 	for (int i = 0; i < 5; i++) {
-		button = [Button init :isTop ? topTextures[i] : bottomTextures[i] //buttonOffTexture
-							  :buttonOnTexture :buttonPressedTexture
+		CCTexture2D* buttonTexture = isTop ? topTextures[i] : bottomTextures[i];
+		
+		button = [Button init :buttonTexture :buttonTexture :buttonTexture
 							  :isTop ? topPositions[i] : bottomPositions[i]
 							  :isTop ? topVertices[i] : bottomVertices[i]];
 		button.tag = i;

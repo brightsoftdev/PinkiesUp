@@ -9,12 +9,17 @@
 #import "Button.h"
 #import "cocos2d.h"
 
+@interface Button (Private)
+@property(nonatomic, readwrite) BOOL isPressed;
+@property(nonatomic, readwrite) BOOL isOn;
+@end
+
 @implementation Button
 
 @synthesize positionInSequence;
-@synthesize isPressed;
-@synthesize isOn;
-//@synthesize isEnabled;
+@dynamic isPressed;
+@dynamic isOn;
+@dynamic isEnabled;
 @synthesize sequenceWasChecked;
 
 #pragma mark overridden functions
@@ -40,15 +45,12 @@
 		vertices[i] = _vertices[i];
 	}
 	
-	isOn = NO;
-	isPressed = NO;
-	isEnabled = NO;
+	self.isOn = NO;
+	self.isPressed = NO;
+	self.isEnabled = NO;
 	sequenceWasChecked = NO;
 		  
 	//[self setTexture:_offTexture];
-	
-	//todo: temp
-	color4f = ccc4f(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1);
 		
 	return self;
 }
@@ -78,8 +80,7 @@
 	if (![Library IsPointInPolygon:4 :vertices :location.x :location.y])
 		return NO;
 	
-    isPressed = YES;
-    [self setTexture:pressedTexture];
+    self.isPressed = YES;
 	
     return YES;
 }
@@ -108,23 +109,10 @@
     //if (buttonStatus == kButtonStatusDisabled)
 	//	return;
 	
-	isPressed = NO;
-	/*
-	 if (isOn) {
-	 isOn = NO;
-	 [self setTexture:offTexture];
-	 }*/
-	if (!isOn) {
-		isOn = YES;
-		[self setTexture:onTexture];
-	}
+	self.isPressed = NO;
+	self.isOn = !isOn;
 }
-/*
-- (void)draw {
-	glColor4f(color4f.r, color4f.b, color4f.g, color4f.a);
-	[Library ccFillPoly :vertices :4 :YES];
-}
-*/
+
 - (void)dealloc {
     [offTexture release];
 	[onTexture release];
@@ -142,7 +130,7 @@
 
 #pragma mark private functions
 - (void) reset {
-	isOn = NO;
+	self.isOn = NO;
 	[self setTexture :offTexture];
 	sequenceWasChecked = NO;
 }
@@ -158,16 +146,46 @@
 	return isEnabled;
 }
 
-- (void)setIsEnabled :(BOOL)_isEnabled{
+- (void)setIsEnabled :(BOOL)_isEnabled {
 	if (_isEnabled) {
 		isEnabled = YES;
-		[self setTexture:onTexture];
+		[self setOpacity:255];
 	}
 	else {
 		isEnabled = NO;
-		[self setTexture:offTexture];
+		[self setOpacity:255 / 2];
 	}
 }
 
+- (BOOL)isPressed {
+	return isPressed;
+}
 
+- (void)setIsPressed :(BOOL)_isPressed {
+	if (_isPressed) {
+		isPressed = YES;
+		[self setTexture:pressedTexture];
+		[self setColor:ccc3(0, 0, 255)]; //todo: hackish
+	}
+	else {
+		isPressed = NO;
+		[self setColor:ccWHITE];
+	}
+}
+
+- (BOOL)isOn {
+	return isOn;
+}
+
+- (void)setIsOn :(BOOL)_isOn {
+	if(_isOn) {
+		isOn = YES;
+		[self setTexture:onTexture];
+	}
+	else {
+		isOn = NO;
+		[self setTexture:offTexture];
+	}
+
+}
 @end

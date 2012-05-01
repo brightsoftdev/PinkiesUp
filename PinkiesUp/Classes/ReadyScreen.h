@@ -18,9 +18,4 @@
 
 + (CCScene *) scene;
 
-// private
-- (void) dealloc;
-- (void) update: (ccTime)dt;
-- (void) beginGame;
-
 @end

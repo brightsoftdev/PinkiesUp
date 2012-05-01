@@ -11,7 +11,6 @@
 #import "Library.h"
 
 @interface Button : CCSprite <CCTargetedTouchDelegate> {
-@private
    // ButtonState buttonState;
     CCTexture2D *offTexture;
 	CCTexture2D *onTexture;
@@ -19,11 +18,13 @@
 	CGPoint vertices[4];
 	ccColor4F color4f;
 	
+	BOOL isPressed;
+	BOOL isOn;
 	BOOL isEnabled;
 }
 
-@property(nonatomic, readwrite) BOOL isPressed; //todo: should be readonly, http://stackoverflow.com/questions/2736762/initializing-a-readonly-property
-@property(nonatomic, readwrite) BOOL isOn;
+@property(nonatomic, readonly) BOOL isPressed;
+@property(nonatomic, readonly) BOOL isOn;
 @property(nonatomic, readwrite) BOOL isEnabled;
 @property(nonatomic, readwrite) int positionInSequence; //todo: should create a new class that inherits Button
 @property(nonatomic, readwrite) BOOL sequenceWasChecked;

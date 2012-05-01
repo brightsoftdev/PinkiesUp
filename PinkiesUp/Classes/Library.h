@@ -33,9 +33,7 @@
  * - (void)draw {
  *	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
  *	CGSize s = CGSizeMake(150, 200);
- *	CGPoint vertices[4]={
- *	ccp(50,50),ccp(s.width,0),
- *	ccp(s.width,s.height),ccp(0,s.height),
+ *	CGPoint vertices[4]= { ccp(50,50), ccp(s.width,0), ccp(s.width,s.height), ccp(0,s.height) }
  *	ccFillPoly(vertices, 4, YES);
  * };
  */
