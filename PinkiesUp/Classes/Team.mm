@@ -6,10 +6,11 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "Global.h"
+#import "GameManager.h"
 #import "Team.h"
 #import "ButtonGroup.h"
 #import "Athlete.h"
-#import "Global.h"
 
 @implementation Team
 

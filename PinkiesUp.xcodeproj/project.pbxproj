@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A4D20DF154E5B9900B8CE8B /* ReadyScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */; };
+		5A4D20DF154E5B9900B8CE8B /* ReadyScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5A4D20DE154E5B9900B8CE8B /* ReadyScreen.mm */; };
 		5A7A6596154F8E67004BB850 /* BottomButton1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A658C154F8E67004BB850 /* BottomButton1.png */; };
 		5A7A6597154F8E67004BB850 /* BottomButton2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A658D154F8E67004BB850 /* BottomButton2.png */; };
 		5A7A6598154F8E67004BB850 /* BottomButton3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A658E154F8E67004BB850 /* BottomButton3.png */; };
@@ -202,7 +202,7 @@
 
 /* Begin PBXFileReference section */
 		5A4D20DD154E5B9900B8CE8B /* ReadyScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadyScreen.h; sourceTree = "<group>"; };
-		5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadyScreen.m; sourceTree = "<group>"; };
+		5A4D20DE154E5B9900B8CE8B /* ReadyScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ReadyScreen.mm; sourceTree = "<group>"; };
 		5A7A658C154F8E67004BB850 /* BottomButton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BottomButton1.png; sourceTree = "<group>"; };
 		5A7A658D154F8E67004BB850 /* BottomButton2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BottomButton2.png; sourceTree = "<group>"; };
 		5A7A658E154F8E67004BB850 /* BottomButton3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BottomButton3.png; sourceTree = "<group>"; };
@@ -1118,7 +1118,7 @@
 				68CBA8111549CE2E0032199B /* Team.h */,
 				68CBA8121549CE2E0032199B /* Team.mm */,
 				5A4D20DD154E5B9900B8CE8B /* ReadyScreen.h */,
-				5A4D20DE154E5B9900B8CE8B /* ReadyScreen.m */,
+				5A4D20DE154E5B9900B8CE8B /* ReadyScreen.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1408,7 +1408,7 @@
 				68CBA81A1549CE2E0032199B /* NSMutableArray_Shuffling.mm in Sources */,
 				68CBA81D1549CE2E0032199B /* Team.mm in Sources */,
 				68CBA85B1549F6430032199B /* GameManager.mm in Sources */,
-				5A4D20DF154E5B9900B8CE8B /* ReadyScreen.m in Sources */,
+				5A4D20DF154E5B9900B8CE8B /* ReadyScreen.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

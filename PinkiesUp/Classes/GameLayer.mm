@@ -7,10 +7,11 @@
 //
 
 #import "GameLayer.h"
-#import "HUD.h"
-#import "Team.h"
-#import "Box2D.h"
+#import "Library.h"
 #import "Global.h"
+#import "GameManager.h"
+#import "Team.h"
+#import "HUD.h"
 #import "Athlete.h"
 
 @implementation GameLayer
