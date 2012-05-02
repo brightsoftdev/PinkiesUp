@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define PTM_RATIO 32
-#define WORLD_GRAVITY -10.0
+#define WORLD_GRAVITY -20.0
+#define AUTO_START 1
 //#define HUD_BUTTON_WIDTH = 113?
 
 /** static class that holds global variables */

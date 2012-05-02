@@ -11,8 +11,9 @@
 #import "AppDelegate.h"
 #import "GameConfig.h"
 #import "RootViewController.h"
-//#import "GameLayer.h"
+#import "GameLayer.h"
 #import "ReadyScreen.h"
+#import "Global.h"
 
 @implementation AppDelegate
 
@@ -112,7 +113,12 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [ReadyScreen scene]];
+    if(AUTO_START)
+        [[CCDirector sharedDirector] runWithScene: [GameLayer scene]];
+    else 
+        [[CCDirector sharedDirector] runWithScene: [ReadyScreen scene]];
+
+
 }
 
 

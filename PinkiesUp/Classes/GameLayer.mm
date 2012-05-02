@@ -67,15 +67,15 @@
     world->SetContinuousPhysics(true);
     
     // Debug Draw functions
-    m_debugDraw = new GLESDebugDraw( PTM_RATIO );
+    m_debugDraw = new GLESDebugDraw(PTM_RATIO);
     world->SetDebugDraw(m_debugDraw);
     
     uint32 flags = 0;
     flags += b2DebugDraw::e_shapeBit;
-    //		flags += b2DebugDraw::e_jointBit;
-    //		flags += b2DebugDraw::e_aabbBit;
-    //		flags += b2DebugDraw::e_pairBit;
-    //		flags += b2DebugDraw::e_centerOfMassBit;
+    flags += b2DebugDraw::e_jointBit;
+    flags += b2DebugDraw::e_aabbBit;
+    flags += b2DebugDraw::e_pairBit;
+    flags += b2DebugDraw::e_centerOfMassBit;
     m_debugDraw->SetFlags(flags);		
     
     
@@ -128,7 +128,13 @@
 		if (b->GetUserData() != NULL) {
 			//Synchronize the sprite position and rotation with the corresponding body
 			CCSprite *myActor = (CCSprite*)b->GetUserData();
-			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+            if(myActor.parent != nil) {
+                //child positioning is relative to parent, so you have to convert from absolute to node space
+                myActor.position = [myActor.parent convertToNodeSpace:CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO)];
+            }
+            else 
+                myActor.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+                
             myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
 
         }
@@ -165,7 +171,8 @@
 }
 
 -(void) draw {
-	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	
+    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	// Needed states:  GL_VERTEX_ARRAY, 
 	// Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 	glDisable(GL_TEXTURE_2D);

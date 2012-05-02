@@ -19,11 +19,12 @@
 		return nil;
 	
 	CGSize s = [CCDirector sharedDirector].winSize; //todo: should really create a singleton class to hold constants
-	
-	// add background image
-	CCSprite *background = [CCSprite spriteWithFile:@"Hud.png"];
-	background.position = ccp(s.width/2, s.height/2);
-	[self addChild:background];
+
+    //removing so the game layer's draw calls show up
+//	// add background image
+//	CCSprite *background = [CCSprite spriteWithFile:@"Hud.png"];
+//	background.position = ccp(s.width/2, s.height/2);
+//	[self addChild:background];
 	
 	// add score label
 	scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:64];
