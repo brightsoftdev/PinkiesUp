@@ -25,7 +25,7 @@
 	
 	// add buttons
 	// todo: this should be done outside of the class
-	//CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
+	CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
 	CCTexture2D *buttonOnTexture = [[CCTextureCache sharedTextureCache] addImage:@"BlueSquare.png"];
 	CCTexture2D *buttonPressedTexture = [[CCTextureCache sharedTextureCache] addImage:@"GreenSquare.png"];
 	
@@ -196,30 +196,17 @@
 	return isSuccessful;
 }
 
-//todo: ugly
-- (void) update2 {
-	// enable or disable button upon touch
+- (int)numberOfOnButtons {
+	int n = 0;
+	
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
 		if (currentButton.isOn)
-			currentButton.isEnabled = YES;
-		else
-			currentButton.isEnabled = NO;
-	}
-}
-
-- (int)numberOfEnabledButtons {
-	int i = 0;
-	
-	for (int i = 0; i < [[self children]count]; i++) {
-		Button *currentButton = (Button *)[self getChildByTag:i];
-		
-		if (currentButton.isEnabled)
-			i++;
+			n++;
 	}
 	
-	return i;
+	return n;
 }
 
 /*

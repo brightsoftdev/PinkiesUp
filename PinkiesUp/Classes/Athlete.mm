@@ -7,6 +7,8 @@
 //
 
 #import "Athlete.h"
+#import "Global.h"
+#import "GameManager.h"
 
 @interface Athlete (Private)
 - (b2Body *) createBodyForSprite: (CCSprite*)sprite;

@@ -22,9 +22,8 @@
 - (void)dealloc;
 /** returns 1 upon successful sequence, 0 upon failed sequence, and -1 otherwise */
 - (int)update;
-- (void)update2;
 - (void)reset;
 //- (void)flashSequence;
 - (BOOL)isPressed;
-- (int)numberOfEnabledButtons;
+- (int)numberOfOnButtons;
 @end

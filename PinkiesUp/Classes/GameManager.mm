@@ -8,7 +8,6 @@
 
 #import "GameManager.h"
 
-
 @implementation GameManager
 
 static GameManager* _sharedGameManager = nil;                      

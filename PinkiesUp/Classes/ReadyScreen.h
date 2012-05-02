@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "ButtonGroup.h"
+
+@class ButtonGroup;
 
 @interface ReadyScreen : CCLayer {
 	ButtonGroup *bottomButtonGroup;

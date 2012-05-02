@@ -7,9 +7,9 @@
 //
 
 #import "Team.h"
-#import "ButtonGroup.h";
-#import "Athlete.h";
-#import "Box2D.h"
+#import "ButtonGroup.h"
+#import "Athlete.h"
+#import "Global.h"
 
 @implementation Team
 

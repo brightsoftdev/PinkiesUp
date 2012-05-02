@@ -7,7 +7,7 @@
 //
 
 #import "Button.h"
-#import "cocos2d.h"
+#import "Library.h"
 
 @interface Button (Private)
 @property(nonatomic, readwrite) BOOL isPressed;
@@ -16,10 +16,10 @@
 
 @implementation Button
 
-@synthesize positionInSequence;
 @dynamic isPressed;
 @dynamic isOn;
 @dynamic isEnabled;
+@synthesize positionInSequence;
 @synthesize sequenceWasChecked;
 
 #pragma mark overridden functions
@@ -45,9 +45,9 @@
 		vertices[i] = _vertices[i];
 	}
 	
-	self.isOn = NO;
+	self.isEnabled = YES;
+	//self.isOn = NO;
 	self.isPressed = NO;
-	self.isEnabled = NO;
 	sequenceWasChecked = NO;
 		  
 	//[self setTexture:_offTexture];
@@ -71,7 +71,7 @@
     //if (buttonStatus == kButtonStatusDisabled)
 	//	return NO;
 	
-    if (isPressed || isOn)
+    if (isPressed) // || isOn
 		return NO;
 	
 	CGPoint location = [touch locationInView:[touch view]];
@@ -142,21 +142,6 @@
 }
 
 #pragma mark properties
-- (BOOL)isEnabled {
-	return isEnabled;
-}
-
-- (void)setIsEnabled :(BOOL)_isEnabled {
-	if (_isEnabled) {
-		isEnabled = YES;
-		[self setOpacity:255];
-	}
-	else {
-		isEnabled = NO;
-		[self setOpacity:255 / 2];
-	}
-}
-
 - (BOOL)isPressed {
 	return isPressed;
 }
@@ -165,7 +150,7 @@
 	if (_isPressed) {
 		isPressed = YES;
 		[self setTexture:pressedTexture];
-		[self setColor:ccc3(0, 0, 255)]; //todo: hackish
+		[self setColor:ccc3(0, 0, 255)];
 	}
 	else {
 		isPressed = NO;
@@ -181,11 +166,29 @@
 	if(_isOn) {
 		isOn = YES;
 		[self setTexture:onTexture];
+		[self setOpacity:255];
 	}
 	else {
 		isOn = NO;
 		[self setTexture:offTexture];
+		[self setOpacity:255 / 2]; //todo: should be in subclass
 	}
 
+}
+
+- (BOOL)isEnabled {
+	return isEnabled;
+}
+
+- (void)setIsEnabled :(BOOL)_isEnabled {
+	if (_isEnabled) {
+		isEnabled = YES;
+		self.isOn = NO;
+	}
+	else {
+		isEnabled = NO;
+		[self setTexture:offTexture];
+		[self setOpacity:255 / 10];
+	}
 }
 @end

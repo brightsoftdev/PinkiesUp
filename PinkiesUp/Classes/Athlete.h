@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Box2D.h"
-#import "Global.h"
-#import "GameManager.h"
 
 /** the main character sprite */
 @interface Athlete : CCNode {

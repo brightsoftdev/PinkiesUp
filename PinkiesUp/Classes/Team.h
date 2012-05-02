@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h";
-#import "ButtonGroup.h";
-#import "Athlete.h";
+
+@class ButtonGroup;
+@class Athlete;
 
 /** kinda overkill for object oriented programming, but who knows, maybe more will be added to this class! */
 @interface Team : CCNode {
