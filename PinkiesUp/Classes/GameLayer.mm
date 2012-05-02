@@ -141,7 +141,7 @@
 	
 	// check if game is over
 	
-	CGFloat END_OF_TRACK = 900; //screenSize.width - 113;
+	CGFloat END_OF_TRACK = screenSize.width - 113;
 	
 	//NSLog(@"umm: %f", bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO);
 	
@@ -152,14 +152,14 @@
 		BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO == END_OF_TRACK;
 		NSString *labelString;
 		
-		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!";
+		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!"; //todo: this is backwards!
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
 		label.position = ccp(screenSize.width/2, screenSize.height/2);
 		[self addChild:label];
 			
 		// restart
-		[self performSelector:@selector(restart:) withObject:nil afterDelay:5.0]; //todo: need withObject?
+		[self performSelector:@selector(restart) withObject:nil afterDelay:5.0]; //todo: need withObject?
 	}
 	
 }
@@ -191,7 +191,7 @@
 }
 
 - (void) restart {
-	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];	
+	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
 }
 
 @end

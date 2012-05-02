@@ -22,7 +22,7 @@
 
 + (id)init;
 - (id)init;
-- (void)update :(int)x :(float)velocity;
 - (void)dealloc;
+- (void)update :(int)x :(float)velocity;
 
 @end
