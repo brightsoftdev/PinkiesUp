@@ -39,6 +39,7 @@
 }
 
 - (void)dealloc {
+	//todo: are you supposed to dealloc box2d classes?
 	[super dealloc];
 }
 

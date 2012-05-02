@@ -7,6 +7,7 @@
 //
 
 #import "ReadyScreen.h"
+#import "GameManager.h"
 #import "ButtonGroup.h"
 #import "GameLayer.h"
 
@@ -26,7 +27,7 @@
 	self.isTouchEnabled = YES;
 	
 	bottomButtonGroup = [ButtonGroup init:0];
-	[self addChild:bottomButtonGroup];
+	[self addChild:bottomButtonGroup]; //todo: memory leak?
 	
 	topButtonGroup = [ButtonGroup init:1];
 	[self addChild:topButtonGroup];
@@ -34,7 +35,7 @@
 	// add start button
 	CGSize s = [CCDirector sharedDirector].winSize;
 	CCLabelTTF *label = [CCLabelTTF labelWithString:@"Start" fontName:@"Arial" fontSize:32];
-    startButton = [CCMenuItemLabel itemWithLabel:label target:self selector:@selector(beginGame)]; //todo: why did beginGame: make it crash?
+    startButton = [CCMenuItemLabel itemWithLabel:label target:self selector:@selector(beginGame)];
     startButton.position = ccp(s.width / 2, s.height / 2);
     CCMenu *menu = [CCMenu menuWithItems:startButton, nil];
     menu.position = CGPointZero;
@@ -46,10 +47,12 @@
 }
 
 - (void)dealloc {
+	//[bottomButtonGroup dealloc]; //todo: fail
+	//[topButtonGroup dealloc];
 	[super dealloc];
 }
 
-- (void) update: (ccTime)dt {
+- (void)update: (ccTime)dt {
 	// if number of players ready is more than 2v2, show start button
 	if ([bottomButtonGroup numberOfOnButtons] > 1 && [topButtonGroup numberOfOnButtons] > 1) {
 		[startButton setIsEnabled: YES];
@@ -60,7 +63,19 @@
 }
 
 - (void)beginGame {
-	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]]; //todo: pass in the buttonGroups
+	// disable buttons that are off
+	//[bottomButtonGroup disableOffButtons];
+	//[topButtonGroup disableOffButtons];
+	
+	// pass the buttonGroups using a singleton
+	//GameManager *gameManager = [GameManager sharedGameManager];
+	//gameManager.bottomButtonGroup = bottomButtonGroup; //todo: multiple pointers, bad? copy and retain failed
+	//gameManager.topButtonGroup = topButtonGroup;
+	
+	//[self dealloc];
+	
+	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]]; //todo: pass in the buttonGroups classes or pass which ones are on (can use child tag)
+	//STOPPED HERE. GameLayere inits fine, but bad access after replacing the scene?
 }
 
 @end

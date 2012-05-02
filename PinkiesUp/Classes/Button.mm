@@ -117,6 +117,8 @@
     [offTexture release];
 	[onTexture release];
     [pressedTexture release];
+	//CGPoint vertices[4]; //todo: delete array?
+	//ccColor4F color4f; //todo: delete struct?
     [super dealloc];
 }
 

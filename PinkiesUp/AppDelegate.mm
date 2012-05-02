@@ -11,8 +11,8 @@
 #import "AppDelegate.h"
 #import "GameConfig.h"
 #import "RootViewController.h"
-#import "GameLayer.h"
-#import "ReadyScreen.h" //todo: temp
+//#import "GameLayer.h"
+#import "ReadyScreen.h"
 
 @implementation AppDelegate
 

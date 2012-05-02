@@ -151,6 +151,7 @@
 }
 
 - (void)dealloc {
+	//[currentSequence release];
 	[super dealloc];
 }
 
@@ -207,6 +208,15 @@
 	}
 	
 	return n;
+}
+
+- (void)disableOffButtons { //todo: bad
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		
+		if (!currentButton.isOn)
+			currentButton.isEnabled = NO;
+	}
 }
 
 /*

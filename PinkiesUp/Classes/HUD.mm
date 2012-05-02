@@ -42,6 +42,12 @@
     return self;
 }
 
+- (void)dealloc {
+	[playerIconBottom dealloc];
+	[playerIconTop dealloc];
+	[super dealloc];
+}
+
 - (void)update :(int)x {
 	//playerIconBottom.position.x = x; //lesson: goddamnit cocos2d
 	playerIconTop.position = ccp(x + 167, playerIconBottom.position.y);

@@ -21,14 +21,21 @@ float velocity = 0;
 float friction = .99;
 float x = 0; // x value of position //todo: should probably use a distance unit
 
-+(id)init :(BOOL)isTop {
++ (id)init :(BOOL)isTop {
 	return [[self alloc] init :isTop];
 }
 
--(id)init :(BOOL)isTop {
+- (id)init :(BOOL)isTop {
 	if (!(self = [super init]))
 		return nil;
 	
+	//GameManager *gameManager = [GameManager sharedGameManager];
+	
+	//if (gameManager.topButtonGroup == NULL || gameManager.bottomButtonGroup == NULL) {
+	//	NSLog(@"shit");
+	//}
+	
+	//buttonGroup = isTop ? [GameManager sharedGameManager].topButtonGroup : [GameManager sharedGameManager].bottomButtonGroup;
 	buttonGroup = [ButtonGroup init:isTop];
 	[self addChild:buttonGroup];
 	
@@ -45,7 +52,13 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	return self;
 }
 
--(void)update :(float)dt {
+- (void)dealloc {
+	[buttonGroup dealloc];
+	[athlete dealloc];
+	[super dealloc];
+}
+
+- (void)update :(float)dt {
 	//when a sequence is successful or failed, update velocity
 	//update athlete animation based on new velocity
 	//update player icon, using distance continuously, based on velocity

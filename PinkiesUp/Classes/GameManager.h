@@ -10,14 +10,20 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 
+@class ButtonGroup;
+
 @interface GameManager : NSObject {
     
 	b2World *world;
     CGSize screenSize;
+	ButtonGroup *bottomButtonGroup;
+	ButtonGroup *topButtonGroup;
 }
 
 @property (readwrite) b2World *world;
 @property (nonatomic, readwrite) CGSize screenSize;
+@property (nonatomic, readwrite, retain) ButtonGroup *bottomButtonGroup;
+@property (nonatomic, readwrite, retain) ButtonGroup *topButtonGroup;
 
 +(GameManager*)sharedGameManager;                                  
 

@@ -26,4 +26,5 @@
 //- (void)flashSequence;
 - (BOOL)isPressed;
 - (int)numberOfOnButtons;
+- (void)disableOffButtons;
 @end

@@ -149,10 +149,10 @@
 		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {
 				
 		// indicate winning player
-		BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO == END_OF_TRACK;
+		BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO >= END_OF_TRACK;
 		NSString *labelString;
 		
-		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!"; //todo: this is backwards!
+		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!";
 		
 		CCLabelTTF *label = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
 		label.position = ccp(screenSize.width/2, screenSize.height/2);

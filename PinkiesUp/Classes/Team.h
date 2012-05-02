@@ -21,8 +21,9 @@
 
 @property (nonatomic, readwrite, retain) Athlete *athlete;
 
-+(id)init :(BOOL)isTop;
--(id)init :(BOOL)isTop;
--(void)update :(float)dt;
++ (id)init :(BOOL)isTop;
+- (id)init :(BOOL)isTop;
+- (void)dealloc;
+- (void)update :(float)dt;
 
 @end

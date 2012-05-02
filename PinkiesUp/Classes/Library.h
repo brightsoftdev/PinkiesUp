@@ -29,7 +29,7 @@
 + (int)IsPointInPolygon :(int)nvert :(CGPoint *)vert :(float)testx :(float)testy;
 
 /** draw a filled polygon to the screen
- * @example:
+ * @example
  * - (void)draw {
  *	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
  *	CGSize s = CGSizeMake(150, 200);

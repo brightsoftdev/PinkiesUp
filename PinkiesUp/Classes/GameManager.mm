@@ -10,8 +10,9 @@
 
 @implementation GameManager
 
-static GameManager* _sharedGameManager = nil;                      
-@synthesize world, screenSize;
+static GameManager* _sharedGameManager = nil;
+
+@synthesize world, screenSize, bottomButtonGroup, topButtonGroup;
 
 +(GameManager*)sharedGameManager 
 {

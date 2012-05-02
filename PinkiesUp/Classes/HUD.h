@@ -12,7 +12,6 @@
 /** This class should display the same data for all devices */
 @interface HUD : CCNode { // todo: should use CCLayer
 	CCLabelTTF *scoreLabel;
-	CCSprite *playerIcon;
 	CCSprite *playerIconTop;
 	CCSprite *playerIconBottom;
 }
