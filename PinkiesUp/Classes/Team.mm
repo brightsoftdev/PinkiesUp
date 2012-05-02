@@ -65,11 +65,12 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	
 	int isSuccessful = [buttonGroup update]; //returns sequence success or failure
 	
-	if (isSuccessful == 1) {
+	if (isSuccessful == 1 && DEBUG_CONTROL != 1) {
         athlete.torsoBody->ApplyLinearImpulse(b2Vec2(25.0f, 0.0f), athlete.torsoBody->GetPosition());
 	}
 	else if (isSuccessful == 0) {
 		// slow down athlete
 	}
+    
 }
 @end
