@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Box2D.h"
+#import "Global.h"
 
 /** the main character sprite */
 @interface Athlete : CCNode {
     CCSprite *torso;
     b2Body *torsoBody;
     b2World* world;
+    CCSprite *head;
 }
 
 //@property (nonatomic, readwrite) b2World *world;

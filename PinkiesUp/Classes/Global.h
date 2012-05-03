@@ -13,6 +13,7 @@
 #define AUTO_START 1
 #define DEBUG_CONTROL 0
 #define DEBUG_DRAW 1
+#define HAROLD_PIXEL_SCALE 29.0
 
 
 //#define HUD_BUTTON_WIDTH = 113?

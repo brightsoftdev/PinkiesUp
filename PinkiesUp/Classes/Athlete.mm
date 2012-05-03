@@ -42,7 +42,7 @@
     torsoBody = (b2Body*)[self createBodyForSprite:torso];
     
     //head
-    CCSprite *head = [CCSprite spriteWithFile:@"harold_0002_8.png"];
+    head = [CCSprite spriteWithFile:@"harold_0002_8.png"];
     head.color = ccc3(170,255,102);
     head.scale = 0.25f;
     head.position = ccp(200,200);
@@ -119,6 +119,24 @@
 //    jd.dampingRatio = 1.2f;
 //    jd.length = 4.0f;
 //    world->CreateJoint(&jd);
+    
+    
+    //face
+    //todo: consider using the flood fill class for his eyes, HAROLD ANGRY!!
+    CCSprite *leftEye = [CCSprite spriteWithFile:@"harold_0000_eye.png"];
+    leftEye.tag = 0;
+    leftEye.position = ccp(2.5*HAROLD_PIXEL_SCALE, 5.5*HAROLD_PIXEL_SCALE);
+    [head addChild:leftEye];
+    
+    CCSprite *rightEye = [CCSprite spriteWithFile:@"harold_0000_eye.png"];
+    rightEye.tag = 1;
+    rightEye.position = ccp(5.5*HAROLD_PIXEL_SCALE, 5.5*HAROLD_PIXEL_SCALE);
+    [head addChild:rightEye];
+    
+    CCSprite *mouth = [CCSprite spriteWithFile:@"harold_0001_mouth.png"];
+    mouth.tag = 2;
+    mouth.position = ccp(4.0*HAROLD_PIXEL_SCALE, 3.5*HAROLD_PIXEL_SCALE);
+    [head addChild:mouth];
     
     return self;
 }
