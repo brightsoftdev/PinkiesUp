@@ -68,8 +68,8 @@
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    //if (buttonStatus == kButtonStatusDisabled)
-	//	return NO;
+    if (!isEnabled)
+		return NO;
 	
     if (isPressed) // || isOn
 		return NO;
@@ -106,8 +106,8 @@
  }
  */
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    //if (buttonStatus == kButtonStatusDisabled)
-	//	return;
+    if (!isEnabled)
+		return;
 	
 	self.isPressed = NO;
 	self.isOn = !isOn;
@@ -152,11 +152,11 @@
 	if (_isPressed) {
 		isPressed = YES;
 		[self setTexture:pressedTexture];
-		[self setColor:ccc3(0, 0, 255)];
+		//[self setColor:ccc3(0, 0, 255)]; //todo: temporarily off
 	}
 	else {
 		isPressed = NO;
-		[self setColor:ccWHITE];
+		//[self setColor:ccWHITE];
 	}
 }
 
@@ -190,7 +190,7 @@
 	else {
 		isEnabled = NO;
 		[self setTexture:offTexture];
-		[self setOpacity:255 / 10]; //STOPPED HERE, why is opacity getting reset?
+		[self setOpacity:255 / 10];
 	}
 }
 @end

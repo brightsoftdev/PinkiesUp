@@ -28,5 +28,5 @@
 - (int)numberOfOnButtons;
 //- (void)disableOffButtons;
 - (BOOL*)isOnArray;
-- (void)disableOffButtons :(BOOL*)isOnArray;
+- (void)setIsEnabled :(BOOL*)IsEnabledArray;
 @end

@@ -113,7 +113,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-    if(AUTO_START)
+    if([Global AUTO_START])
         [[CCDirector sharedDirector] runWithScene: [GameLayer scene]];
     else 
         [[CCDirector sharedDirector] runWithScene: [ReadyScreen scene]];

@@ -32,7 +32,7 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	GameManager *gameManager = [GameManager sharedGameManager];
 	
 	buttonGroup = [ButtonGroup init:isTop];
-	isTop ? [buttonGroup disableOffButtons:gameManager.topEnabledButtons] : [buttonGroup disableOffButtons:gameManager.bottomEnabledButtons];
+	isTop ? [buttonGroup setIsEnabled:gameManager.topEnabledButtons] : [buttonGroup setIsEnabled:gameManager.bottomEnabledButtons];
 	[self addChild:buttonGroup];
 	
 	athlete = [Athlete init];

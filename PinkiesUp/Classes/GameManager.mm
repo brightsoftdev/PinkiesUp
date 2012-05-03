@@ -7,6 +7,7 @@
 // adapted from Ray Wenderlich and Rod Strougo's code on p174 of "Learning Cocos2d"
 
 #import "GameManager.h"
+#import "Global.h"
 
 @implementation GameManager
 
@@ -42,6 +43,14 @@ static GameManager* _sharedGameManager = nil;
     if (self != nil) {
         // Game Manager initialized
         CCLOG(@"Game Manager Singleton, init");
+		
+		// for AUTO_START
+		if ([Global AUTO_START]) {
+			BOOL* a = new BOOL[5];
+			a[1] = YES; a[2] = NO; a[3] = YES; a[4] = NO; a[5] = YES;
+			topEnabledButtons = a;
+			bottomEnabledButtons = a;
+		}
     }
     return self;
 }

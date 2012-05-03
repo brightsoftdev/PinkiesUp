@@ -210,22 +210,11 @@
 	return n;
 }
 
-/*
-- (void)disableOffButtons {
+- (void)setIsEnabled :(BOOL*)IsEnabledArray {	
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
-		if (!currentButton.isOn)
-			currentButton.isEnabled = NO;
-	}
-}
-*/
-
-- (void)disableOffButtons :(BOOL*)isOnArray {	
-	for (int i = 0; i < [[self children]count]; i++) {
-		Button *currentButton = (Button *)[self getChildByTag:i];
-		
-		if (!isOnArray[i])
+		if (!IsEnabledArray[i])
 			currentButton.isEnabled = NO;
 	}
 }
