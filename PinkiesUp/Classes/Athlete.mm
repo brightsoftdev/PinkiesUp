@@ -31,15 +31,17 @@
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     world = [GameManager sharedGameManager].world;
+    
+    float spineLength = 4.0f;
 	
-	// add torso
+	//torso
     torso = [CCSprite spriteWithFile:@"harold_0009_1.png"];
     torso.color = ccc3(170,255,102);
     torso.scale = 0.25f;
     [self addChild:torso];
     torsoBody = (b2Body*)[self createBodyForSprite:torso];
     
-    //add head
+    //head
     CCSprite *head = [CCSprite spriteWithFile:@"harold_0002_8.png"];
     head.color = ccc3(170,255,102);
     head.scale = 0.25f;
@@ -49,7 +51,7 @@
     b2Body *headBody;
     b2BodyDef boxBodyDef;
     boxBodyDef.type = b2_dynamicBody;
-    boxBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); 
+    boxBodyDef.position.Set(spineLength + torsoBody->GetPosition().x, spineLength + torsoBody->GetPosition().y); 
     boxBodyDef.userData = head;
     boxBodyDef.linearDamping = 0.0f;  //adds air resistance to box
     headBody = world->CreateBody(&boxBodyDef);
@@ -60,29 +62,63 @@
 	
 	b2FixtureDef fixdef;
 	fixdef.shape = &boxShape;
-	fixdef.density = 1.0f;
+	fixdef.density = 0.4f;
 	fixdef.friction = 0.8f;
 	fixdef.restitution = 0.1f;
 	headBody->CreateFixture(&fixdef);
     
-    b2DistanceJointDef jd;
-    jd.Initialize(torsoBody, headBody, torsoBody->GetPosition(), headBody->GetPosition());
-    //b2Vec2 p1, p2, d;
+    headBody->SetFixedRotation(TRUE);
     
-    jd.frequencyHz = 4.0f;
-    jd.dampingRatio = 1.2f;
-    jd.length = 4.0f;
-    world->CreateJoint(&jd);
     
-//    jd.bodyA = torsoBody;
-//    jd.bodyB = headBody;
-//    jd.localAnchorA.Set(-10.0f, 0.0f);
-//    jd.localAnchorB.Set(-0.5f, -0.5f);
-//    p1 = jd.bodyA->GetWorldPoint(jd.localAnchorA);
-//    p2 = jd.bodyB->GetWorldPoint(jd.localAnchorB);
-//    d = p2 - p1;
-//    jd.length = d.Length();
-//    m_joints[0] = m_world->CreateJoint(&jd);
+    //spine
+    b2BodyDef bd;
+    bd.type = b2_dynamicBody;
+    bd.position.Set(spineLength/2.0f + torsoBody->GetPosition().x, spineLength/2.0f + torsoBody->GetPosition().y); 
+    bd.angle = M_PI/4;
+    bd.linearDamping = 0.0f;  //adds air resistance to box
+    b2Body *spine = world->CreateBody(&bd);
+    
+	boxShape.SetAsBox(spineLength, 0.2f);// SetAsBox uses the half width and height (extents)
+	
+	fixdef.shape = &boxShape;
+	fixdef.density = 0.1f;
+	fixdef.friction = 0.8f;
+	fixdef.restitution = 0.3f;
+	spine->CreateFixture(&fixdef);
+    
+    //torso spine joint
+    b2RevoluteJointDef rjd;
+    rjd.Initialize(torsoBody, spine, torsoBody->GetPosition());
+    rjd.motorSpeed = -0.1f * b2_pi;
+    rjd.maxMotorTorque = 3.0f;
+    rjd.enableMotor = true;
+    rjd.lowerAngle = 0;
+    rjd.upperAngle = 0.5f * b2_pi;
+    rjd.enableLimit = true;
+    rjd.collideConnected = false;
+    world->CreateJoint(&rjd);
+    
+    //head spine joint
+    b2RevoluteJointDef rjd2;
+    rjd2.Initialize(headBody, spine, headBody->GetPosition());
+    rjd2.motorSpeed = 1.0f * b2_pi;
+    rjd2.maxMotorTorque = 10000.0f;
+    rjd2.enableMotor = false;
+    rjd2.lowerAngle = -M_PI;
+    rjd2.upperAngle = M_PI;
+    rjd2.enableLimit = true;
+    rjd2.collideConnected = false;
+    world->CreateJoint(&rjd2);
+
+    
+//    b2DistanceJointDef jd;
+//    jd.Initialize(torsoBody, headBody, torsoBody->GetPosition(), headBody->GetPosition());
+//    //b2Vec2 p1, p2, d;
+//    
+//    jd.frequencyHz = 4.0f;
+//    jd.dampingRatio = 1.2f;
+//    jd.length = 4.0f;
+//    world->CreateJoint(&jd);
     
     return self;
 }
