@@ -47,8 +47,10 @@
 }
 
 - (void)dealloc {
-	//[bottomButtonGroup dealloc]; //todo: fail
+	//[bottomButtonGroup dealloc]; //todo: dealloc is run because it is a child of this class?
 	//[topButtonGroup dealloc];
+	//delete bottomButtonGroup; //todo: why does deleting a pointer make it crash?
+	//delete topButtonGroup;
 	[super dealloc];
 }
 
@@ -63,19 +65,11 @@
 }
 
 - (void)beginGame {
-	// disable buttons that are off
-	//[bottomButtonGroup disableOffButtons];
-	//[topButtonGroup disableOffButtons];
+	// save an array which holds which buttons are on to the singleton
+	[GameManager sharedGameManager].topEnabledButtons = [topButtonGroup isOnArray];
+	[GameManager sharedGameManager].bottomEnabledButtons = [bottomButtonGroup isOnArray];
 	
-	// pass the buttonGroups using a singleton
-	//GameManager *gameManager = [GameManager sharedGameManager];
-	//gameManager.bottomButtonGroup = bottomButtonGroup; //todo: multiple pointers, bad? copy and retain failed
-	//gameManager.topButtonGroup = topButtonGroup;
-	
-	//[self dealloc];
-	
-	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]]; //todo: pass in the buttonGroups classes or pass which ones are on (can use child tag)
-	//STOPPED HERE. GameLayere inits fine, but bad access after replacing the scene?
+	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
 }
 
 @end

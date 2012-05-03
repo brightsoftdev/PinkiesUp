@@ -29,14 +29,10 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	if (!(self = [super init]))
 		return nil;
 	
-	//GameManager *gameManager = [GameManager sharedGameManager];
+	GameManager *gameManager = [GameManager sharedGameManager];
 	
-	//if (gameManager.topButtonGroup == NULL || gameManager.bottomButtonGroup == NULL) {
-	//	NSLog(@"shit");
-	//}
-	
-	//buttonGroup = isTop ? [GameManager sharedGameManager].topButtonGroup : [GameManager sharedGameManager].bottomButtonGroup;
 	buttonGroup = [ButtonGroup init:isTop];
+	isTop ? [buttonGroup disableOffButtons:gameManager.topEnabledButtons] : [buttonGroup disableOffButtons:gameManager.bottomEnabledButtons];
 	[self addChild:buttonGroup];
 	
 	athlete = [Athlete init];

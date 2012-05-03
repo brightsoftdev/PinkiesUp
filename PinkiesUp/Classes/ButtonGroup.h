@@ -14,7 +14,7 @@
 	//NSMutableArray *buttonsArray;
 	//BOOL isJumping;
 	int currentSequencePosition;
-	NSMutableArray *currentSequence;
+	//NSMutableArray *currentSequence;
 }
 
 + (id)init :(BOOL)isTop;
@@ -26,5 +26,7 @@
 //- (void)flashSequence;
 - (BOOL)isPressed;
 - (int)numberOfOnButtons;
-- (void)disableOffButtons;
+//- (void)disableOffButtons;
+- (BOOL*)isOnArray;
+- (void)disableOffButtons :(BOOL*)isOnArray;
 @end

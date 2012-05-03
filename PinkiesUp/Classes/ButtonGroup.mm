@@ -210,13 +210,35 @@
 	return n;
 }
 
-- (void)disableOffButtons { //todo: bad
+/*
+- (void)disableOffButtons {
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
 		if (!currentButton.isOn)
 			currentButton.isEnabled = NO;
 	}
+}
+*/
+
+- (void)disableOffButtons :(BOOL*)isOnArray {	
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		
+		if (!isOnArray[i])
+			currentButton.isEnabled = NO;
+	}
+}
+
+- (BOOL*)isOnArray {
+	BOOL* a = new BOOL[[[self children]count]];
+	
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		a[i] = currentButton.isOn;
+	}
+	
+	return a;
 }
 
 /*

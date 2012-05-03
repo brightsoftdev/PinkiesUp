@@ -117,8 +117,8 @@
     [offTexture release];
 	[onTexture release];
     [pressedTexture release];
-	//CGPoint vertices[4]; //todo: delete array?
-	//ccColor4F color4f; //todo: delete struct?
+	//delete vertices; // these two are on the stack, no need to delete, they will disappear once out of scope
+	//delete color4f;
     [super dealloc];
 }
 
@@ -190,7 +190,7 @@
 	else {
 		isEnabled = NO;
 		[self setTexture:offTexture];
-		[self setOpacity:255 / 10];
+		[self setOpacity:255 / 10]; //STOPPED HERE, why is opacity getting reset?
 	}
 }
 @end

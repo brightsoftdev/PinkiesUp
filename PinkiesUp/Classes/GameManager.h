@@ -16,15 +16,14 @@
     
 	b2World *world;
     CGSize screenSize;
-	ButtonGroup *bottomButtonGroup;
-	ButtonGroup *topButtonGroup;
+	BOOL *topEnabledButtons;
+	BOOL *bottomEnabledButtons;
 }
 
 @property (readwrite) b2World *world;
 @property (nonatomic, readwrite) CGSize screenSize;
-@property (nonatomic, readwrite, retain) ButtonGroup *bottomButtonGroup;
-@property (nonatomic, readwrite, retain) ButtonGroup *topButtonGroup;
-
-+(GameManager*)sharedGameManager;                                  
+@property (nonatomic, readwrite) BOOL *topEnabledButtons; //todo: no need to retain?
+@property (nonatomic, readwrite) BOOL *bottomEnabledButtons;
++(GameManager*)sharedGameManager;                                
 
 @end
