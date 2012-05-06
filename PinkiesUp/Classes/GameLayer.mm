@@ -17,7 +17,6 @@
 @implementation GameLayer
 
 +(CCScene *) scene {
-	//Singleton *sharedSingleton = [Singleton sharedSingleton];
 	CCScene *scene = [CCScene node];
 	GameLayer *layer = [GameLayer node];
 	[scene addChild: layer];
@@ -204,8 +203,5 @@
 - (void) restart {
 	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
 }
-
-
-
 
 @end

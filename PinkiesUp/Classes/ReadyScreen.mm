@@ -27,7 +27,7 @@
 	self.isTouchEnabled = YES;
 	
 	bottomButtonGroup = [ButtonGroup init:0];
-	[self addChild:bottomButtonGroup]; //todo: memory leak?
+	[self addChild:bottomButtonGroup];
 	
 	topButtonGroup = [ButtonGroup init:1];
 	[self addChild:topButtonGroup];
@@ -47,25 +47,19 @@
 }
 
 - (void)dealloc {
-	//[bottomButtonGroup dealloc]; //todo: dealloc is run because it is a child of this class?
-	//[topButtonGroup dealloc];
-	//delete bottomButtonGroup; //todo: why does deleting a pointer make it crash?
-	//delete topButtonGroup;
 	[super dealloc];
 }
 
 - (void)update: (ccTime)dt {
 	// if number of players ready is more than 2v2, show start button
-	if ([bottomButtonGroup numberOfOnButtons] > 1 && [topButtonGroup numberOfOnButtons] > 1) {
+	if ([bottomButtonGroup numberOfOnButtons] > 1 && [topButtonGroup numberOfOnButtons] > 1)
 		[startButton setIsEnabled: YES];
-	}
-	else {
+	else
 		[startButton setIsEnabled: NO];
-	}
 }
 
 - (void)beginGame {
-	// save an array which holds which buttons are on to the singleton
+	// save which buttons are enabled
 	[GameManager sharedGameManager].topEnabledButtons = [topButtonGroup isOnArray];
 	[GameManager sharedGameManager].bottomEnabledButtons = [bottomButtonGroup isOnArray];
 	

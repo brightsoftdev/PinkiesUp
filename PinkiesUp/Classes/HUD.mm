@@ -18,7 +18,7 @@
     if (!(self = [super init]))
 		return nil;
 	
-	CGSize s = [CCDirector sharedDirector].winSize; //todo: should really create a singleton class to hold constants
+	CGSize s = [CCDirector sharedDirector].winSize;
 
     //removing so the game layer's draw calls show up
 //	// add background image
@@ -32,7 +32,7 @@
 	//[self addChild:scoreLabel]; //todo: temp
 	
 	// add player icons
-	playerIconTop = [CCSprite spriteWithFile:@"PlayerIcon.png"]; //todo: should draw icon according to color
+	playerIconTop = [CCSprite spriteWithFile:@"PlayerIcon.png"];
 	playerIconTop.position = ccp(s.width * 3 / 20, s.height / 2); // x = 167
 	[self addChild:playerIconTop];
 	
@@ -44,16 +44,12 @@
 }
 
 - (void)dealloc {
-	[playerIconBottom dealloc];
-	[playerIconTop dealloc];
 	[super dealloc];
 }
 
 - (void)update :(int)x {
-	//playerIconBottom.position.x = x; //lesson: goddamnit cocos2d
 	playerIconTop.position = ccp(x + 167, playerIconBottom.position.y);
 	playerIconBottom.position = ccp(x + 167, playerIconBottom.position.y);
-	//self.score += velocityDelta;
 }
 
 - (void)setScore :(int)integer {

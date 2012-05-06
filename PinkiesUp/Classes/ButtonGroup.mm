@@ -25,9 +25,9 @@
 	
 	// add buttons
 	// todo: this should be done outside of the class
-	CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
-	CCTexture2D *buttonOnTexture = [[CCTextureCache sharedTextureCache] addImage:@"BlueSquare.png"];
-	CCTexture2D *buttonPressedTexture = [[CCTextureCache sharedTextureCache] addImage:@"GreenSquare.png"];
+	//CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
+	//CCTexture2D *buttonOnTexture = [[CCTextureCache sharedTextureCache] addImage:@"BlueSquare.png"];
+	//CCTexture2D *buttonPressedTexture = [[CCTextureCache sharedTextureCache] addImage:@"GreenSquare.png"];
 	
 	CCTexture2D* bottomTextures[5] = {
 		[[CCTextureCache sharedTextureCache] addImage:@"BottomButton1.png"],
@@ -130,28 +130,13 @@
 		button.tag = i;
 		[self addChild:button];
 	}
-		
-	//set sequence
 	
-	// use array instead of getChildByTag?
-	//buttonsArray = [NSMutableArray arrayWithObjects: button, button2, button3, button4, nil];
-	//for (int i = 0; i < buttonsArray.count; i++)
-	//NSLog (@"Element %i = %@", i, [buttonsArray objectAtIndex: i]);
-	
-	NSUInteger childrenCount = [[self children]count];
-	
-	for (int i = 0; i < childrenCount; i++) {
-		Button *currentButton = (Button *)[self getChildByTag:i];
-		currentButton.positionInSequence = isTop ? childrenCount - i - 1 : i;
-	}
-	
-	currentSequencePosition = 0;
+	[self setDefaultSequence :isTop];
 	
 	return self;
 }
 
 - (void)dealloc {
-	//[currentSequence release];
 	[super dealloc];
 }
 
@@ -166,14 +151,14 @@
 	// return if successful
 	
 	int isSuccessful = -1; // 1 is successful, 0 is failure, -1 otherwise
+	int enabledButtonsCount = [self numberOfEnabledButtons]; //todo: temp
 	
 	for (int i = 0; i < [[self children]count]; i++) {
 		
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
-		if (currentButton.isOn && !currentButton.sequenceWasChecked) {
+		if (currentButton.isEnabled && currentButton.isOn && !currentButton.sequenceWasChecked) {
 			if (currentButton.positionInSequence == currentSequencePosition) { //todo: can't debug properties? WTF http://stackoverflow.com/questions/3270248/seeing-the-value-of-a-synthesized-property-in-the-xcode-debugger-when-there-is-n
-				//NSLog(@"%d, %d", (int)currentButton.positionInSequence, (int)currentSequencePosition);
 				currentButton.sequenceWasChecked = YES;
 				currentSequencePosition++;
 			}
@@ -184,7 +169,7 @@
 			}
 			
 			// if last button was pressed, sucesss!
-			if (currentSequencePosition == [[self children]count]) {
+			if (currentSequencePosition == enabledButtonsCount) {
 				isSuccessful = 1;
 				[self reset];
 				currentSequencePosition = 0;
@@ -210,12 +195,23 @@
 	return n;
 }
 
-- (void)setIsEnabled :(BOOL*)IsEnabledArray {	
+- (int)numberOfEnabledButtons {
+	int n = 0;
+	
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
-		if (!IsEnabledArray[i])
-			currentButton.isEnabled = NO;
+		if (currentButton.isEnabled)
+			n++;
+	}
+	
+	return n;
+}
+
+- (void)setIsEnabled :(BOOL*)IsEnabledArray {	
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		currentButton.isEnabled = IsEnabledArray[i];
 	}
 }
 
@@ -229,6 +225,40 @@
 	
 	return a;
 }
+
+- (void)setDefaultSequence :(BOOL)isTop {
+	//set sequence
+	
+	// use array instead of getChildByTag?
+	//buttonsArray = [NSMutableArray arrayWithObjects: button, button2, button3, button4, nil];
+	//for (int i = 0; i < buttonsArray.count; i++)
+	//NSLog (@"Element %i = %@", i, [buttonsArray objectAtIndex: i]);
+	
+	NSUInteger childrenCount = [[self children]count];
+	int positionInSequence = 0;
+		
+	if (isTop) {
+		for (int i = childrenCount - 1; i > -1; i--) {
+			Button *currentButton = (Button *)[self getChildByTag:i];
+			if (currentButton.isEnabled) {
+				currentButton.positionInSequence = positionInSequence; // top buttons have inverted sequence
+				positionInSequence++;
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < childrenCount; i++) {
+			Button *currentButton = (Button *)[self getChildByTag:i];
+			if (currentButton.isEnabled) {
+				currentButton.positionInSequence = positionInSequence;
+				positionInSequence++;
+			}
+		}
+	}
+		
+	currentSequencePosition = 0;
+}
+
 
 /*
 - (void)setRandomSequence {
@@ -255,7 +285,8 @@
 - (void)reset {
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
-		[currentButton reset];
+		if (currentButton.isEnabled)
+			[currentButton reset];
 	}
 }
 /*
@@ -271,12 +302,15 @@
 */
 
 #pragma mark properties
+/*
 - (BOOL)isPressed {
 	BOOL b = NO;
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
-		b = b && [currentButton isPressed];
+		if (currentButton.isEnabled)
+			b = b && [currentButton isPressed];
 	}
 	return b;
 }
+*/
 @end

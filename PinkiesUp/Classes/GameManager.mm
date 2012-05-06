@@ -38,7 +38,7 @@ static GameManager* _sharedGameManager = nil;
     return nil;  
 }
 
--(id)init {                                                      
+-(id)init {
     self = [super init];
     if (self != nil) {
         // Game Manager initialized
@@ -47,7 +47,7 @@ static GameManager* _sharedGameManager = nil;
 		// for AUTO_START
 		if ([Global AUTO_START]) {
 			BOOL* a = new BOOL[5];
-			a[1] = YES; a[2] = NO; a[3] = YES; a[4] = NO; a[5] = YES;
+			a[0] = NO; a[1] = YES; a[2] = YES; a[3] = YES; a[4] = NO;
 			topEnabledButtons = a;
 			bottomEnabledButtons = a;
 		}

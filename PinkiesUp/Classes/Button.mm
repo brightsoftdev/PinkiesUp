@@ -49,6 +49,7 @@
 	//self.isOn = NO;
 	self.isPressed = NO;
 	sequenceWasChecked = NO;
+	positionInSequence = -1;
 		  
 	//[self setTexture:_offTexture];
 		

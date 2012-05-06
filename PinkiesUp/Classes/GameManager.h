@@ -13,7 +13,6 @@
 @class ButtonGroup;
 
 @interface GameManager : NSObject {
-    
 	b2World *world;
     CGSize screenSize;
 	BOOL *topEnabledButtons;
@@ -22,7 +21,7 @@
 
 @property (readwrite) b2World *world;
 @property (nonatomic, readwrite) CGSize screenSize;
-@property (nonatomic, readwrite) BOOL *topEnabledButtons; //todo: no need to retain?
+@property (nonatomic, readwrite) BOOL *topEnabledButtons;
 @property (nonatomic, readwrite) BOOL *bottomEnabledButtons;
 +(GameManager*)sharedGameManager;                                
 

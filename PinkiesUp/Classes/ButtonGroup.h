@@ -24,9 +24,10 @@
 - (int)update;
 - (void)reset;
 //- (void)flashSequence;
-- (BOOL)isPressed;
+//- (BOOL)isPressed;
 - (int)numberOfOnButtons;
-//- (void)disableOffButtons;
+- (int)numberOfEnabledButtons;
 - (BOOL*)isOnArray;
 - (void)setIsEnabled :(BOOL*)IsEnabledArray;
+- (void)setDefaultSequence :(BOOL)isTop;
 @end

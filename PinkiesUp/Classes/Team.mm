@@ -16,11 +16,6 @@
 
 @synthesize athlete;
 
-//todo: temp
-float velocity = 0;
-float friction = .99;
-float x = 0; // x value of position //todo: should probably use a distance unit
-
 + (id)init :(BOOL)isTop {
 	return [[self alloc] init :isTop];
 }
@@ -33,6 +28,7 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	
 	buttonGroup = [ButtonGroup init:isTop];
 	isTop ? [buttonGroup setIsEnabled:gameManager.topEnabledButtons] : [buttonGroup setIsEnabled:gameManager.bottomEnabledButtons];
+	[buttonGroup setDefaultSequence:isTop];
 	[self addChild:buttonGroup];
 	
 	athlete = [Athlete init];
@@ -55,7 +51,7 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 }
 
 - (void)update :(float)dt {
-	//when a sequence is successful or failed, update velocity
+	//when a sequence is completed successfully or failed, update velocity
 	//update athlete animation based on new velocity
 	//update player icon, using distance continuously, based on velocity
 	
