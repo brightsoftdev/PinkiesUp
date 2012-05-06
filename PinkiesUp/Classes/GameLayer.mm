@@ -13,6 +13,14 @@
 #import "Team.h"
 #import "HUD.h"
 #import "Athlete.h"
+#import "ReadyScreen.h";
+
+@interface GameLayer (Private)
+- (void)setupWorld;
+- (void)showEndMenu;
+- (void)restart;
+- (void)goToReadyScreen;
+@end
 
 @implementation GameLayer
 
@@ -23,6 +31,7 @@
 	return scene;
 }
 
+#pragma mark overridden functions
 -(id) init {
 	if(!(self=[super init]))
 		return nil;
@@ -50,7 +59,83 @@
 	return self;
 }
 
--(void) setupWorld {
+- (void) dealloc {
+	// box2d
+	delete world;
+	world = NULL;
+	delete m_debugDraw;
+    
+	[super dealloc];
+}
+
+- (void) draw {
+	
+    
+    if(DEBUG_DRAW == 1 ) {
+        
+        // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        // Needed states:  GL_VERTEX_ARRAY, 
+        // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+        glDisable(GL_TEXTURE_2D);
+        glDisableClientState(GL_COLOR_ARRAY);
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        
+        world->DrawDebugData();
+        
+        // restore default GL states
+        glEnable(GL_TEXTURE_2D);
+        glEnableClientState(GL_COLOR_ARRAY);
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    }
+    
+}
+
+#pragma mark main function
+- (void) update: (ccTime)dt { // delta time
+	
+    [topTeam update: dt];
+	[bottomTeam update: dt];
+    
+	// box2d
+    int32 velocityIterations = 8;
+	int32 positionIterations = 1;
+	
+	// Instruct the world to perform a single step of simulation. It is
+	// generally best to keep the time step and iterations fixed.
+	world->Step(dt, velocityIterations, positionIterations);
+    
+    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
+	{
+		if (b->GetUserData() != NULL) {
+			//Synchronize the sprite position and rotation with the corresponding body
+			CCSprite *myActor = (CCSprite*)b->GetUserData();
+            if(myActor.parent != nil) {
+                //child positioning is relative to parent, so you have to convert from absolute to node space
+                myActor.position = [myActor.parent convertToNodeSpace:CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO)];
+            }
+            else 
+                myActor.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+                
+            myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+
+        }
+    }
+    
+    topTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,-WORLD_GRAVITY), topTeam.athlete.torsoBody->GetPosition());
+    bottomTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,WORLD_GRAVITY), bottomTeam.athlete.torsoBody->GetPosition());
+	
+    // after box2d
+	
+	// check if game is over
+	if (topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
+		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {
+		[self showEndMenu];
+	}
+	
+}
+
+#pragma mark private functions
+- (void) setupWorld {
     
     // Define the gravity vector.
     b2Vec2 gravity;
@@ -109,99 +194,43 @@
     [GameManager sharedGameManager].world = world;
 }
 
-- (void) update: (ccTime)dt { // delta time
+- (void) showEndMenu {
+	//todo: dim the entire game
 	
-    [topTeam update: dt];
-	[bottomTeam update: dt];
-    
-	// box2d
-    int32 velocityIterations = 8;
-	int32 positionIterations = 1;
+	// indicate winning player
+	BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO >= END_OF_TRACK;
+	NSString *labelString;
 	
-	// Instruct the world to perform a single step of simulation. It is
-	// generally best to keep the time step and iterations fixed.
-	world->Step(dt, velocityIterations, positionIterations);
-    
-    for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
-	{
-		if (b->GetUserData() != NULL) {
-			//Synchronize the sprite position and rotation with the corresponding body
-			CCSprite *myActor = (CCSprite*)b->GetUserData();
-            if(myActor.parent != nil) {
-                //child positioning is relative to parent, so you have to convert from absolute to node space
-                myActor.position = [myActor.parent convertToNodeSpace:CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO)];
-            }
-            else 
-                myActor.position = CGPointMake(b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-                
-            myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
-
-        }
-    }
-    
-    topTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,-WORLD_GRAVITY), topTeam.athlete.torsoBody->GetPosition());
-    bottomTeam.athlete.torsoBody->ApplyForce(b2Vec2(0.0f,WORLD_GRAVITY), bottomTeam.athlete.torsoBody->GetPosition());
+	labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!";
 	
-    // after box2d
+	CCLabelTTF *winnerLabel = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
+	winnerLabel.position = ccp(screenSize.width/2, screenSize.height * 3 / 4);
+	[self addChild:winnerLabel];
 	
-	// check if game is over
+	//todo: add score
 	
-	CGFloat END_OF_TRACK = screenSize.width - 113;
+	// add menu
+	CGSize s = [CCDirector sharedDirector].winSize;
 	
-	//NSLog(@"umm: %f", bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO);
+	CCLabelTTF* replayLabel = [CCLabelTTF labelWithString:@"Replay" fontName:@"Arial" fontSize:32];
+	CCMenuItemLabel* replayMenuItem = [CCMenuItemLabel itemWithLabel:replayLabel target:self selector:@selector(restart)];
+	replayMenuItem.position = ccp(s.width / 2, s.height / 2 + 50);
 	
-	if (topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
-		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {
-				
-		// indicate winning player
-		BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO >= END_OF_TRACK;
-		NSString *labelString;
-		
-		labelString = topTeamWon ? @"Top Team Wins!" : @"Bottom Team Wins!";
-		
-		CCLabelTTF *label = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
-		label.position = ccp(screenSize.width/2, screenSize.height/2);
-		[self addChild:label];
-			
-		// restart
-		[self performSelector:@selector(restart) withObject:nil afterDelay:5.0]; //todo: need withObject?
-	}
+	CCLabelTTF* changePlayersLabel = [CCLabelTTF labelWithString:@"Change Players" fontName:@"Arial" fontSize:32];
+	CCMenuItemLabel* changePlayersMenuItem = [CCMenuItemLabel itemWithLabel:changePlayersLabel target:self selector:@selector(goToReadyScreen)];
+	changePlayersMenuItem.position = ccp(s.width / 2, s.height / 2 - 50);
 	
-}
-
--(void) draw {
-	
-    
-    if(DEBUG_DRAW == 1 ) {
-        
-        // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-        // Needed states:  GL_VERTEX_ARRAY, 
-        // Unneeded states: GL_TEXTURE_2D, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-        glDisable(GL_TEXTURE_2D);
-        glDisableClientState(GL_COLOR_ARRAY);
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        
-        world->DrawDebugData();
-        
-        // restore default GL states
-        glEnable(GL_TEXTURE_2D);
-        glEnableClientState(GL_COLOR_ARRAY);
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    }
-    
-}
-
-- (void) dealloc {
-	// box2d
-	delete world;
-	world = NULL;
-	delete m_debugDraw;
-    
-	[super dealloc];
+	CCMenu *menu = [CCMenu menuWithItems:replayMenuItem, changePlayersMenuItem, nil];
+	menu.position = CGPointZero;
+	[self addChild:menu];
 }
 
 - (void) restart {
 	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
+}
+
+- (void) goToReadyScreen {
+	[[CCDirector sharedDirector] replaceScene:[ReadyScreen scene]];
 }
 
 @end
