@@ -13,7 +13,7 @@
 #import "Team.h"
 #import "HUD.h"
 #import "Athlete.h"
-#import "ReadyScreen.h";
+#import "ReadyScreen.h"
 
 @interface GameLayer (Private)
 - (void)setupWorld;

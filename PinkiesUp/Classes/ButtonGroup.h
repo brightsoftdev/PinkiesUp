@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h";
+#import "cocos2d.h"
 
 /** contains buttons and group functions */
 @interface ButtonGroup : CCNode {
