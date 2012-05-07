@@ -39,6 +39,7 @@
 	self.isTouchEnabled = YES;
     screenSize = [CCDirector sharedDirector].winSize;
     [GameManager sharedGameManager].screenSize = screenSize;
+	hasEnded = NO;
     
     // box2d
     [self setupWorld];
@@ -127,8 +128,10 @@
     // after box2d
 	
 	// check if game is over
-	if (topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
-		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK) {
+	if ((topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK
+		|| bottomTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO > END_OF_TRACK)
+		&& !hasEnded) {
+		hasEnded = YES;
 		[self showEndMenu];
 	}
 	
@@ -207,7 +210,20 @@
 	winnerLabel.position = ccp(screenSize.width/2, screenSize.height * 3 / 4);
 	[self addChild:winnerLabel];
 	
-	//todo: add score
+	// adjust and add score
+	topTeamWon ? [GameManager sharedGameManager].topTeamScore++ : [GameManager sharedGameManager].bottomTeamScore++;
+	
+	int topTeamScore = [GameManager sharedGameManager].topTeamScore;
+	int bottomTeamScore = [GameManager sharedGameManager].bottomTeamScore;
+	
+	NSString *scoreLabelString = [NSString stringWithFormat:@"%i-%i %@",
+								  topTeamScore >= bottomTeamScore ? topTeamScore : bottomTeamScore,
+								  topTeamScore < bottomTeamScore ? topTeamScore : bottomTeamScore,
+								  topTeamScore >= bottomTeamScore ? @"Top" : @"Bottom"];
+								  
+	CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreLabelString fontName:@"Arial" fontSize:32];
+	scoreLabel.position = ccp(screenSize.width/2, screenSize.height * 3 / 4 - 50);
+	[self addChild:scoreLabel];
 	
 	// add menu
 	CGSize s = [CCDirector sharedDirector].winSize;

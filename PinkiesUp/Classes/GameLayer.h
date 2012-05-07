@@ -22,6 +22,7 @@
     b2World* world;
 	GLESDebugDraw *m_debugDraw;
     CGSize screenSize;
+	BOOL hasEnded;
 }
 
 +(CCScene *) scene;

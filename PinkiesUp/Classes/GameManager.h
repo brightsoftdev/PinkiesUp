@@ -23,6 +23,8 @@
 @property (nonatomic, readwrite) CGSize screenSize;
 @property (nonatomic, readwrite) BOOL *topEnabledButtons;
 @property (nonatomic, readwrite) BOOL *bottomEnabledButtons;
-+(GameManager*)sharedGameManager;                                
+@property (nonatomic, readwrite) int topTeamScore;
+@property (nonatomic, readwrite) int bottomTeamScore;
++(GameManager*)sharedGameManager;
 
 @end

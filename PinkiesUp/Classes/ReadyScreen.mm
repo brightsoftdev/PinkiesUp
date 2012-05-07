@@ -63,6 +63,10 @@
 	[GameManager sharedGameManager].topEnabledButtons = [topButtonGroup isOnArray];
 	[GameManager sharedGameManager].bottomEnabledButtons = [bottomButtonGroup isOnArray];
 	
+	// reset score
+	[GameManager sharedGameManager].topTeamScore = 0;
+	[GameManager sharedGameManager].bottomTeamScore = 0;
+	
 	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
 }
 

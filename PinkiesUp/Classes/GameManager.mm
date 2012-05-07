@@ -13,7 +13,7 @@
 
 static GameManager* _sharedGameManager = nil;
 
-@synthesize world, screenSize, topEnabledButtons, bottomEnabledButtons;
+@synthesize world, screenSize, topEnabledButtons, bottomEnabledButtons, topTeamScore, bottomTeamScore;
 
 +(GameManager*)sharedGameManager 
 {
@@ -31,7 +31,7 @@ static GameManager* _sharedGameManager = nil;
 {
     @synchronized ([GameManager class])                          
     {
-        NSAssert(_sharedGameManager == nil, @"Attempted to allocated a second instance of the Game Manager singleton");                                          // 6
+        NSAssert(_sharedGameManager == nil, @"Attempted to allocated a second instance of the Game Manager singleton");
         _sharedGameManager = [super alloc];
         return _sharedGameManager;                                
     }
@@ -51,6 +51,9 @@ static GameManager* _sharedGameManager = nil;
 			topEnabledButtons = a;
 			bottomEnabledButtons = a;
 		}
+		
+		self.topTeamScore = 0;
+		self.bottomTeamScore = 0;
     }
     return self;
 }
