@@ -28,7 +28,7 @@
     if(!(self = [super init]))
 		return nil;
     
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     world = [GameManager sharedGameManager].world;
     
