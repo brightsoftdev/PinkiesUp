@@ -52,6 +52,8 @@
 	positionInSequence = -1;
 		  
 	//[self setTexture:_offTexture];
+	//[self setOpacity:255 / 2];
+	[self setColor:(ccc3(0, 0, 0))]; // needed to use CCSpriteAdd
 		
 	return self;
 }
@@ -124,9 +126,10 @@
 #pragma mark public functions
 - (void)flash {
 	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
+	//[self setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE }];
 	//[self setColor:(ccc3(255, 255, 255))];
-	[self setTexture:pressedTexture];
-	[self schedule:@selector(unflash) interval:0.5];
+	//[self setTexture:pressedTexture];
+	[self schedule:@selector(continueFlash)];
 }
 
 #pragma mark private functions
@@ -136,10 +139,28 @@
 	sequenceWasChecked = NO;
 }
 
-- (void) unflash {
-	[self unschedule:@selector(unflash)];
+- (void) continueFlash {
+	[self setColor:(ccc3([self color].r + 30, [self color].g + 30, [self color].b + 30))];
+	if ([self color].r >= 240) {
+		[self unschedule:@selector(continueFlash)];
+		[self schedule:@selector(continueFlash2)];
+		//[self endFlash];
+	}
+}
+
+- (void) continueFlash2 {
+	[self setColor:(ccc3([self color].r - 30, [self color].g - 30, [self color].b - 30))];
+	if ([self color].r <= 0) {
+		//[self unschedule:@selector(continueFlash2)];
+		[self endFlash];
+	}
+}
+
+- (void) endFlash {
+	[self unschedule:@selector(continueFlash2)];
 	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-	[self setTexture:offTexture];
+	[self setColor:(ccc3(0, 0, 0))];
+	//[self setTexture:offTexture];
 }
 
 #pragma mark properties
@@ -168,6 +189,7 @@
 		isOn = YES;
 		[self setTexture:onTexture];
 		[self setOpacity:255];
+		[self flash];
 	}
 	else {
 		isOn = NO;

@@ -17,7 +17,7 @@
 
 @implementation Athlete
 
-@synthesize torsoBody;
+@synthesize torsoBody, world;
 
 #pragma mark overridden functions
 + (id)init {

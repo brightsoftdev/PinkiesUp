@@ -11,7 +11,7 @@
 @implementation HUD
 
 + (id)init {
-	return [[self alloc] init]; //lesson: this is like a static function, cannot access instance variables from here, but can somehow call a non-static function that can...WTF
+	return [[self alloc] init];
 }
 
 - (id)init {
@@ -52,7 +52,7 @@
 	playerIconTop.position = ccp(x + 167, playerIconBottom.position.y);
 	playerIconBottom.position = ccp(x + 167, playerIconBottom.position.y);
 }
-
+/*
 - (void)setScore :(int)integer {
     scoreLabel.string = [NSString stringWithFormat:@"%d", integer];
 }
@@ -60,5 +60,5 @@
 - (int)score {
 	return [scoreLabel.string intValue];
 }
-
+*/
 @end

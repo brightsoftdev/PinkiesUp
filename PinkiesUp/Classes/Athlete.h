@@ -17,7 +17,7 @@
     b2World* world;
 }
 
-//@property (nonatomic, readwrite) b2World *world;
+@property (nonatomic, readwrite) b2World *world;
 @property (nonatomic, readwrite) b2Body *torsoBody;
 
 + (id)init;

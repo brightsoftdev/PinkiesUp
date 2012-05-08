@@ -19,6 +19,7 @@
 		5A7A659E154F8E67004BB850 /* TopButton4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A6594154F8E67004BB850 /* TopButton4.png */; };
 		5A7A659F154F8E67004BB850 /* TopButton5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A6595154F8E67004BB850 /* TopButton5.png */; };
 		5AB7C2861558990C00EFDC8D /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB7C2851558990C00EFDC8D /* Line.png */; };
+		5ABC39961559C4EC0085CF11 /* CCSpriteAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC39951559C4EC0085CF11 /* CCSpriteAdd.m */; };
 		68CBA6111549CD0F0032199B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6101549CD0F0032199B /* QuartzCore.framework */; };
 		68CBA6131549CD0F0032199B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6121549CD0F0032199B /* OpenGLES.framework */; };
 		68CBA6151549CD0F0032199B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6141549CD0F0032199B /* OpenAL.framework */; };
@@ -211,6 +212,8 @@
 		5A7A6594154F8E67004BB850 /* TopButton4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopButton4.png; sourceTree = "<group>"; };
 		5A7A6595154F8E67004BB850 /* TopButton5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopButton5.png; sourceTree = "<group>"; };
 		5AB7C2851558990C00EFDC8D /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
+		5ABC39941559C4EC0085CF11 /* CCSpriteAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSpriteAdd.h; path = PinkiesUp/CCSpriteAdd.h; sourceTree = SOURCE_ROOT; };
+		5ABC39951559C4EC0085CF11 /* CCSpriteAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSpriteAdd.m; path = PinkiesUp/CCSpriteAdd.m; sourceTree = SOURCE_ROOT; };
 		68CBA60C1549CD0F0032199B /* PinkiesUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinkiesUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68CBA6101549CD0F0032199B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68CBA6121549CD0F0032199B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1092,6 +1095,8 @@
 		68CBA7FC1549CE2E0032199B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5ABC39941559C4EC0085CF11 /* CCSpriteAdd.h */,
+				5ABC39951559C4EC0085CF11 /* CCSpriteAdd.m */,
 				68CBA7FD1549CE2E0032199B /* Athlete.h */,
 				68CBA7FE1549CE2E0032199B /* Athlete.mm */,
 				68CBA7FF1549CE2E0032199B /* Button.h */,
@@ -1398,6 +1403,7 @@
 				68CBA81D1549CE2E0032199B /* Team.mm in Sources */,
 				68CBA85B1549F6430032199B /* GameManager.mm in Sources */,
 				5A4D20DF154E5B9900B8CE8B /* ReadyScreen.mm in Sources */,
+				5ABC39961559C4EC0085CF11 /* CCSpriteAdd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

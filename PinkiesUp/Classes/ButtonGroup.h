@@ -17,7 +17,7 @@
 	//NSMutableArray *currentSequence;
 }
 
-+ (id)init :(BOOL)isTop;
++ (id)init :(BOOL)isTop; //todo: pass in buttons
 - (id)init :(BOOL)isTop;
 - (void)dealloc;
 /** returns 1 upon successful sequence, 0 upon failed sequence, and -1 otherwise */
@@ -29,5 +29,5 @@
 - (int)numberOfEnabledButtons;
 - (BOOL*)isOnArray;
 - (void)setIsEnabled :(BOOL*)IsEnabledArray;
-- (void)setDefaultSequence :(BOOL)isTop;
+- (void)setDefaultSequence :(BOOL)isTop; //todo: isReversed
 @end

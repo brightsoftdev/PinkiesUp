@@ -206,7 +206,6 @@
 }
 
 -(void)updateCountdown:(ccTime)delta {
-	
 	countdown--;
 
 	if (countdown > 0 ) {

@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CCSpriteAdd.h"
 
-@interface Button : CCSprite <CCTargetedTouchDelegate> {
+@interface Button : CCSpriteAdd <CCTargetedTouchDelegate> {
    // ButtonState buttonState;
     CCTexture2D *offTexture;
 	CCTexture2D *onTexture;
     CCTexture2D *pressedTexture;
 	CGPoint vertices[4];
-	ccColor4F color4f;
-	
 	BOOL isPressed;
 	BOOL isOn;
 	BOOL isEnabled;
