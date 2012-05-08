@@ -36,7 +36,7 @@
 	pressedTexture = _pressedTexture;
 	self.position = position;
 	//NSLog(@"%f, %f, %f, %f", position.x, position.y, self.contentSize.width, self.contentSize.height);
-	//self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2); //todo: remove this when the initWithTexture is removed
+	//self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2);
 	self.position = ccp(position.x + self.contentSize.width / 2, position.y - self.contentSize.height / 2); // todo: oops, used top left vertex, instead of bottom left
 	
 	
@@ -118,8 +118,6 @@
     [offTexture release];
 	[onTexture release];
     [pressedTexture release];
-	//delete vertices; // these two are on the stack, no need to delete, they will disappear once out of scope
-	//delete color4f;
     [super dealloc];
 }
 
@@ -191,7 +189,7 @@
 	else {
 		isEnabled = NO;
 		[self setTexture:offTexture];
-		[self setOpacity:255 / 10];
+		[self setOpacity:255 / 5];
 	}
 }
 @end

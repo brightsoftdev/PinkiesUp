@@ -24,7 +24,7 @@
 	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	// add buttons
-	// todo: this should be done outside of the class
+	// todo: this should be done outside of the class, pass in buttons
 	//CCTexture2D *buttonOffTexture = [[CCTextureCache sharedTextureCache] addImage:@"RedSquare.png"];
 	//CCTexture2D *buttonOnTexture = [[CCTextureCache sharedTextureCache] addImage:@"BlueSquare.png"];
 	//CCTexture2D *buttonPressedTexture = [[CCTextureCache sharedTextureCache] addImage:@"GreenSquare.png"];
@@ -151,14 +151,14 @@
 	// return if successful
 	
 	int isSuccessful = -1; // 1 is successful, 0 is failure, -1 otherwise
-	int enabledButtonsCount = [self numberOfEnabledButtons]; //todo: temp
+	int enabledButtonsCount = [self numberOfEnabledButtons]; //todo: sloppy
 	
 	for (int i = 0; i < [[self children]count]; i++) {
 		
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		
 		if (currentButton.isEnabled && currentButton.isOn && !currentButton.sequenceWasChecked) {
-			if (currentButton.positionInSequence == currentSequencePosition) { //todo: can't debug properties? WTF http://stackoverflow.com/questions/3270248/seeing-the-value-of-a-synthesized-property-in-the-xcode-debugger-when-there-is-n
+			if (currentButton.positionInSequence == currentSequencePosition) {
 				currentButton.sequenceWasChecked = YES;
 				currentSequencePosition++;
 			}

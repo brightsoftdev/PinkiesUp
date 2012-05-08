@@ -23,6 +23,8 @@
 	GLESDebugDraw *m_debugDraw;
     CGSize screenSize;
 	BOOL hasEnded;
+	CCLabelTTF *countdownLabel;
+	int countdown;
 }
 
 +(CCScene *) scene;

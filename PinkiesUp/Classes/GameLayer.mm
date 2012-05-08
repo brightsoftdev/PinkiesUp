@@ -53,9 +53,17 @@
 	
 	bottomTeam = [Team init:0];
 	[self addChild:bottomTeam];
-    
+	
+	// add countdown
+	countdown = 5;
+    countdownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", countdown] 
+							fontName:@"Arial" fontSize:32];
+    countdownLabel.position = ccp(screenSize.width / 2, screenSize.height / 2);
+    [self addChild:countdownLabel];
+	
 	// add schedulers (event listeners)
-	[self schedule: @selector(update:)]; //default interval is set to 60, in CCDirector, kDefaultFPS directive constant
+	//[self schedule: @selector(update:) interval:0.0f repeat:kCCRepeatForever delay:5.0f]; //default interval is set to 60, in CCDirector, kDefaultFPS directive constant
+    [self schedule:@selector(updateCountdown:) interval:0.5f];
 	
 	return self;
 }
@@ -197,8 +205,30 @@
     [GameManager sharedGameManager].world = world;
 }
 
+-(void)updateCountdown:(ccTime)delta {
+	
+	countdown--;
+
+	if (countdown > 0 ) {
+		[countdownLabel setString:[NSString stringWithFormat:@"%i", countdown]];
+	}
+	else if (countdown <= 0 && countdown > -2) {
+		[countdownLabel setString:[NSString stringWithString:@"GO"]];
+		[self schedule: @selector(update:)];
+	}
+	else if (countdown <= -2) {
+		[self removeChild:countdownLabel cleanup:YES];
+		[self unschedule:@selector(updateCountdown:)];
+	}
+}
+
 - (void) showEndMenu {
-	//todo: dim the entire game
+	// todo: make this a layer
+	
+	// dim the game layer
+	CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)];
+	[colorLayer setOpacity:175];
+	[self addChild:colorLayer z:1];
 	
 	// indicate winning player
 	BOOL topTeamWon = topTeam.athlete.torsoBody->GetPosition().x * PTM_RATIO >= END_OF_TRACK;
@@ -208,7 +238,7 @@
 	
 	CCLabelTTF *winnerLabel = [CCLabelTTF labelWithString:labelString fontName:@"Arial" fontSize:32];
 	winnerLabel.position = ccp(screenSize.width/2, screenSize.height * 3 / 4);
-	[self addChild:winnerLabel];
+	[self addChild:winnerLabel z:2];
 	
 	// adjust and add score
 	topTeamWon ? [GameManager sharedGameManager].topTeamScore++ : [GameManager sharedGameManager].bottomTeamScore++;
@@ -223,14 +253,14 @@
 								  
 	CCLabelTTF *scoreLabel = [CCLabelTTF labelWithString:scoreLabelString fontName:@"Arial" fontSize:32];
 	scoreLabel.position = ccp(screenSize.width/2, screenSize.height * 3 / 4 - 50);
-	[self addChild:scoreLabel];
+	[self addChild:scoreLabel z:2];
 	
 	// add menu
 	CGSize s = [CCDirector sharedDirector].winSize;
 	
 	CCLabelTTF* replayLabel = [CCLabelTTF labelWithString:@"Replay" fontName:@"Arial" fontSize:32];
 	CCMenuItemLabel* replayMenuItem = [CCMenuItemLabel itemWithLabel:replayLabel target:self selector:@selector(restart)];
-	replayMenuItem.position = ccp(s.width / 2, s.height / 2 + 50);
+	replayMenuItem.position = ccp(s.width / 2, s.height / 2);
 	
 	CCLabelTTF* changePlayersLabel = [CCLabelTTF labelWithString:@"Change Players" fontName:@"Arial" fontSize:32];
 	CCMenuItemLabel* changePlayersMenuItem = [CCMenuItemLabel itemWithLabel:changePlayersLabel target:self selector:@selector(goToReadyScreen)];
@@ -238,7 +268,7 @@
 	
 	CCMenu *menu = [CCMenu menuWithItems:replayMenuItem, changePlayersMenuItem, nil];
 	menu.position = CGPointZero;
-	[self addChild:menu];
+	[self addChild:menu z:2];
 }
 
 - (void) restart {
