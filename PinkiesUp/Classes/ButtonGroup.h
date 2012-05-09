@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class Button;
+
 /** contains buttons and group functions */
 @interface ButtonGroup : CCNode {
 	//NSMutableArray *buttonsArray;
@@ -17,9 +19,13 @@
 	//NSMutableArray *currentSequence;
 }
 
-+ (id)init :(BOOL)isTop; //todo: pass in buttons
-- (id)init :(BOOL)isTop;
++ (id)init;
++ (id)initWithButtons :(NSArray*)buttons;
+- (id)init;
+- (id)initWithButtons :(NSArray*)buttons;
 - (void)dealloc;
+- (void)addButton :(Button*)button;
+- (void)addButtons :(NSArray*)buttons;
 /** returns 1 upon successful sequence, 0 upon failed sequence, and -1 otherwise */
 - (int)update;
 - (void)reset;
@@ -29,5 +35,5 @@
 - (int)numberOfEnabledButtons;
 - (BOOL*)isOnArray;
 - (void)setIsEnabled :(BOOL*)IsEnabledArray;
-- (void)setDefaultSequence :(BOOL)isTop; //todo: isReversed
+- (void)setLinearSequence :(BOOL)isInReverse;
 @end

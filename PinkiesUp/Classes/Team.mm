@@ -26,9 +26,10 @@
 	
 	GameManager *gameManager = [GameManager sharedGameManager];
 	
-	buttonGroup = [ButtonGroup init:isTop];
+	NSArray* buttons = [[GameManager sharedGameManager] createButtons:isTop];
+	buttonGroup = [ButtonGroup initWithButtons:buttons];
 	isTop ? [buttonGroup setIsEnabled:gameManager.topEnabledButtons] : [buttonGroup setIsEnabled:gameManager.bottomEnabledButtons];
-	[buttonGroup setDefaultSequence:isTop];
+	[buttonGroup setLinearSequence:isTop];
 	[self addChild:buttonGroup];
 	
 	athlete = [Athlete init];

@@ -14,14 +14,14 @@
 #import "HUD.h"
 #import "Athlete.h"
 #import "ReadyScreen.h"
-
+/* todo: does Xcode 4 not need categories to call a private function if it is not declared before it?
 @interface GameLayer (Private)
 - (void)setupWorld;
 - (void)showEndMenu;
 - (void)restart;
 - (void)goToReadyScreen;
 @end
-
+*/
 @implementation GameLayer
 
 +(CCScene *) scene {

@@ -12,6 +12,11 @@
 @interface Button (Private)
 @property(nonatomic, readwrite) BOOL isPressed;
 @property(nonatomic, readwrite) BOOL isOn;
+/*
+- (void) reset;
+- (void) updateFlash;
+- (void) updateFlash2;
+*/
 @end
 
 @implementation Button
@@ -23,6 +28,11 @@
 @synthesize sequenceWasChecked;
 
 #pragma mark overridden functions
++ (id)init:(CCTexture2D *)texture :(CGPoint)position :(CGPoint *) vertices {
+	//todo: ignore textures
+	return [[[self alloc] init :texture :texture :texture :position :vertices] autorelease];
+}
+
 + (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *)vertices {
     return [[[self alloc] init :offTexture :onTexture :pressedTexture :position :vertices] autorelease];
 }
@@ -125,11 +135,7 @@
 
 #pragma mark public functions
 - (void)flash {
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-	//[self setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE }];
-	//[self setColor:(ccc3(255, 255, 255))];
-	//[self setTexture:pressedTexture];
-	[self schedule:@selector(continueFlash)];
+	[self schedule:@selector(updateFlash)];
 }
 
 #pragma mark private functions
@@ -139,28 +145,19 @@
 	sequenceWasChecked = NO;
 }
 
-- (void) continueFlash {
+- (void) updateFlash {
 	[self setColor:(ccc3([self color].r + 30, [self color].g + 30, [self color].b + 30))];
 	if ([self color].r >= 240) {
-		[self unschedule:@selector(continueFlash)];
-		[self schedule:@selector(continueFlash2)];
-		//[self endFlash];
+		[self unschedule:@selector(updateFlash)];
+		[self schedule:@selector(updateFlash2)];
 	}
 }
 
-- (void) continueFlash2 {
+- (void) updateFlash2 {
 	[self setColor:(ccc3([self color].r - 30, [self color].g - 30, [self color].b - 30))];
-	if ([self color].r <= 0) {
-		//[self unschedule:@selector(continueFlash2)];
-		[self endFlash];
+	if ([self color].r == 0) {
+		[self unschedule:@selector(updateFlash2)];
 	}
-}
-
-- (void) endFlash {
-	[self unschedule:@selector(continueFlash2)];
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-	[self setColor:(ccc3(0, 0, 0))];
-	//[self setTexture:offTexture];
 }
 
 #pragma mark properties
@@ -172,11 +169,10 @@
 	if (_isPressed) {
 		isPressed = YES;
 		[self setTexture:pressedTexture];
-		//[self setColor:ccc3(0, 0, 255)]; //todo: temporarily off
+		[self flash];
 	}
 	else {
 		isPressed = NO;
-		//[self setColor:ccWHITE];
 	}
 }
 
@@ -189,14 +185,12 @@
 		isOn = YES;
 		[self setTexture:onTexture];
 		[self setOpacity:255];
-		[self flash];
 	}
 	else {
 		isOn = NO;
 		[self setTexture:offTexture];
 		[self setOpacity:255 / 2]; //todo: should be in subclass
 	}
-
 }
 
 - (BOOL)isEnabled {

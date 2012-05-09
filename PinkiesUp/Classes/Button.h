@@ -27,6 +27,7 @@
 @property(nonatomic, readwrite) int positionInSequence; //todo: should create a new class that inherits Button
 @property(nonatomic, readwrite) BOOL sequenceWasChecked;
 
++ (id)init:(CCTexture2D *)texture :(CGPoint)position :(CGPoint *) vertices;
 + (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *) vertices;
 - (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *) vertices;
 - (void)dealloc;

@@ -26,10 +26,12 @@
 	
 	self.isTouchEnabled = YES;
 	
-	bottomButtonGroup = [ButtonGroup init:0];
+	NSArray* bottomButtons = [[GameManager sharedGameManager] createButtons:0];
+	bottomButtonGroup = [ButtonGroup initWithButtons:bottomButtons];
 	[self addChild:bottomButtonGroup];
 	
-	topButtonGroup = [ButtonGroup init:1];
+	NSArray* topButtons = [[GameManager sharedGameManager] createButtons:1];
+	topButtonGroup = [ButtonGroup initWithButtons:topButtons];
 	[self addChild:topButtonGroup];
 	
 	// add start button

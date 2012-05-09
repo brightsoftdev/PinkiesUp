@@ -25,6 +25,8 @@
 @property (nonatomic, readwrite) BOOL *bottomEnabledButtons;
 @property (nonatomic, readwrite) int topTeamScore;
 @property (nonatomic, readwrite) int bottomTeamScore;
-+(GameManager*)sharedGameManager;
 
++ (GameManager*)sharedGameManager;
+/* i didn't know where else to put this */
+- (NSArray*)createButtons :(BOOL)isTop;
 @end
