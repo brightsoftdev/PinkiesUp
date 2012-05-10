@@ -118,7 +118,14 @@
 	return n;
 }
 
-- (void)setIsEnabled :(BOOL*)IsEnabledArray {	
+- (void)setIsEnabled :(BOOL)IsEnabled {	
+	for (int i = 0; i < [[self children]count]; i++) {
+		Button *currentButton = (Button *)[self getChildByTag:i];
+		currentButton.isEnabled = IsEnabled;
+	}
+}
+
+- (void)setIsEnabledWithArray :(BOOL*)IsEnabledArray {	
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
 		currentButton.isEnabled = IsEnabledArray[i];

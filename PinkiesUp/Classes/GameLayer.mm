@@ -54,6 +54,9 @@
 	bottomTeam = [Team init:0];
 	[self addChild:bottomTeam];
 	
+	[bottomTeam setIsEnabled:NO];
+	[topTeam setIsEnabled:NO];
+	
 	// add countdown
 	countdown = 5;
     countdownLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%i", countdown] 
@@ -213,6 +216,8 @@
 	}
 	else if (countdown <= 0 && countdown > -2) {
 		[countdownLabel setString:[NSString stringWithString:@"GO"]];
+		[bottomTeam setIsEnabled:YES];
+		[topTeam setIsEnabled:YES];
 		[self schedule: @selector(update:)];
 	}
 	else if (countdown <= -2) {

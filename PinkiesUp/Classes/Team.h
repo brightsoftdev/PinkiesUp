@@ -17,13 +17,17 @@
 	ButtonGroup *buttonGroup;
 	Athlete *athlete;
 	//todo: HUD icon?
+	BOOL isTop_; //todo: bad
+	//BOOL isEnabled // not used
 }
 
+@property (nonatomic, readwrite, retain) ButtonGroup *buttonGroup;
 @property (nonatomic, readwrite, retain) Athlete *athlete;
 
 + (id)init :(BOOL)isTop;
 - (id)init :(BOOL)isTop;
 - (void)dealloc;
 - (void)update :(float)dt;
+- (void)setIsEnabled :(BOOL)isEnabled;
 
 @end

@@ -14,8 +14,9 @@
 
 @implementation Team
 
-@synthesize athlete;
+@synthesize buttonGroup, athlete;
 
+#pragma mark - overridden functions
 + (id)init :(BOOL)isTop {
 	return [[self alloc] init :isTop];
 }
@@ -24,13 +25,15 @@
 	if (!(self = [super init]))
 		return nil;
 	
+	isTop_ = isTop;
+	
 	GameManager *gameManager = [GameManager sharedGameManager];
 	CGSize screenSize = gameManager.screenSize;
 	
 	// add buttons
 	NSArray* buttons = [[GameManager sharedGameManager] createButtons:isTop];
 	buttonGroup = [ButtonGroup initWithButtons:buttons];
-	isTop ? [buttonGroup setIsEnabled:gameManager.topEnabledButtons] : [buttonGroup setIsEnabled:gameManager.bottomEnabledButtons];
+	isTop ? [buttonGroup setIsEnabledWithArray:gameManager.topEnabledButtons] : [buttonGroup setIsEnabledWithArray:gameManager.bottomEnabledButtons];
 	[buttonGroup setLinearSequence:isTop];
 	[self addChild:buttonGroup];
 	
@@ -52,6 +55,7 @@
 	[super dealloc];
 }
 
+#pragma mark - public functions
 - (void)update :(float)dt {
 	//when a sequence is completed successfully or failed, update velocity
 	//update athlete animation based on new velocity
@@ -67,4 +71,15 @@
 	}
     
 }
+
+#pragma mark - private functions
+- (void)setIsEnabled :(BOOL)isEnabled {
+	GameManager *gameManager = [GameManager sharedGameManager];
+	
+	if (isEnabled)
+		isTop_ ? [buttonGroup setIsEnabledWithArray:gameManager.topEnabledButtons] : [buttonGroup setIsEnabledWithArray:gameManager.bottomEnabledButtons];
+	else
+		[buttonGroup setIsEnabled:NO];
+}
+
 @end

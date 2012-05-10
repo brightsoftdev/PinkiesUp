@@ -34,6 +34,7 @@
 - (int)numberOfOnButtons;
 - (int)numberOfEnabledButtons;
 - (BOOL*)isOnArray;
-- (void)setIsEnabled :(BOOL*)IsEnabledArray;
+- (void)setIsEnabled :(BOOL)IsEnabled;
+- (void)setIsEnabledWithArray :(BOOL*)IsEnabledArray;
 - (void)setLinearSequence :(BOOL)isInReverse;
 @end
