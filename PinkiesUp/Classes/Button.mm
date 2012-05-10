@@ -123,7 +123,7 @@
 		return;
 	
 	self.isPressed = NO;
-	self.isOn = !isOn;
+	self.isOn = !isOn; //todo: cannot turn off code goes here
 }
 
 - (void)dealloc {

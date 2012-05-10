@@ -11,7 +11,6 @@
 #import "CCSpriteAdd.h"
 
 @interface Button : CCSpriteAdd <CCTargetedTouchDelegate> {
-   // ButtonState buttonState;
     CCTexture2D *offTexture;
 	CCTexture2D *onTexture;
     CCTexture2D *pressedTexture;
