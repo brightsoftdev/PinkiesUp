@@ -32,8 +32,8 @@
 - (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *) vertices;
 - (void)dealloc;
 - (void)reset;
+- (void)flash;
 - (BOOL)isEnabled;
 - (void)setIsEnabled :(BOOL)_isEnabled;
-- (void)flash;
 
 @end

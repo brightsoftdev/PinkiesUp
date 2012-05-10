@@ -25,17 +25,18 @@
 		return nil;
 	
 	GameManager *gameManager = [GameManager sharedGameManager];
+	CGSize screenSize = gameManager.screenSize;
 	
+	// add buttons
 	NSArray* buttons = [[GameManager sharedGameManager] createButtons:isTop];
 	buttonGroup = [ButtonGroup initWithButtons:buttons];
 	isTop ? [buttonGroup setIsEnabled:gameManager.topEnabledButtons] : [buttonGroup setIsEnabled:gameManager.bottomEnabledButtons];
 	[buttonGroup setLinearSequence:isTop];
 	[self addChild:buttonGroup];
 	
+	// add athlete
 	athlete = [Athlete init];
 	[self addChild:athlete];
-    
-    CGSize screenSize = [GameManager sharedGameManager].screenSize;
 	
     if(isTop)
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*3/4.0f/PTM_RATIO), 0);

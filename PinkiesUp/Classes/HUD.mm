@@ -10,6 +10,7 @@
 
 @implementation HUD
 
+#pragma mark - overridden functions
 + (id)init {
 	return [[self alloc] init];
 }
@@ -48,10 +49,13 @@
 	[super dealloc];
 }
 
+#pragma mark - public functions
 - (void)update :(int)x {
 	playerIconTop.position = ccp(x + 167, playerIconBottom.position.y);
 	playerIconBottom.position = ccp(x + 167, playerIconBottom.position.y);
 }
+
+#pragma mark - properties
 /*
 - (void)setScore :(int)integer {
     scoreLabel.string = [NSString stringWithFormat:@"%d", integer];

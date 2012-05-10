@@ -26,6 +26,7 @@
 	
 	self.isTouchEnabled = YES;
 	
+	// add buttons
 	NSArray* bottomButtons = [[GameManager sharedGameManager] createButtons:0];
 	bottomButtonGroup = [ButtonGroup initWithButtons:bottomButtons];
 	[self addChild:bottomButtonGroup];

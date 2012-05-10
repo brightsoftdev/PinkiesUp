@@ -12,7 +12,7 @@
 
 @implementation ButtonGroup
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
 + (id)init {
 	return [[self alloc] init];
 }
@@ -50,7 +50,7 @@
 	[super dealloc];
 }
 
-#pragma mark public functions
+#pragma mark - public functions
 - (int)update {
 	// check if buttons are being pressed in the correct sequence:
 	// if button was pressed, check sequence
@@ -191,7 +191,7 @@
 }
 */
 
-#pragma mark private functions
+#pragma mark - private functions
 - (void)reset {
 	for (int i = 0; i < [[self children]count]; i++) {
 		Button *currentButton = (Button *)[self getChildByTag:i];
@@ -211,7 +211,7 @@
 }
 */
 
-#pragma mark properties
+#pragma mark - properties
 /*
 - (BOOL)isPressed {
 	BOOL b = NO;

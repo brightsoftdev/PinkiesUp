@@ -27,7 +27,7 @@
 @synthesize positionInSequence;
 @synthesize sequenceWasChecked;
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
 + (id)init:(CCTexture2D *)texture :(CGPoint)position :(CGPoint *) vertices {
 	//todo: ignore textures
 	return [[[self alloc] init :texture :texture :texture :position :vertices] autorelease];
@@ -127,18 +127,18 @@
 }
 
 - (void)dealloc {
-    [offTexture release];
+	[offTexture release];
 	[onTexture release];
     [pressedTexture release];
     [super dealloc];
 }
 
-#pragma mark public functions
+#pragma mark - public functions
 - (void)flash {
 	[self schedule:@selector(updateFlash)];
 }
 
-#pragma mark private functions
+#pragma mark - private functions
 - (void) reset {
 	self.isOn = NO;
 	[self setTexture :offTexture];
@@ -160,7 +160,24 @@
 	}
 }
 
-#pragma mark properties
+#pragma mark - public properties
+- (BOOL)isEnabled {
+	return isEnabled;
+}
+
+- (void)setIsEnabled :(BOOL)_isEnabled {
+	if (_isEnabled) {
+		isEnabled = YES;
+		self.isOn = NO;
+	}
+	else {
+		isEnabled = NO;
+		[self setTexture:offTexture];
+		[self setOpacity:255 / 5];
+	}
+}
+
+#pragma mark - private properties
 - (BOOL)isPressed {
 	return isPressed;
 }
@@ -193,19 +210,4 @@
 	}
 }
 
-- (BOOL)isEnabled {
-	return isEnabled;
-}
-
-- (void)setIsEnabled :(BOOL)_isEnabled {
-	if (_isEnabled) {
-		isEnabled = YES;
-		self.isOn = NO;
-	}
-	else {
-		isEnabled = NO;
-		[self setTexture:offTexture];
-		[self setOpacity:255 / 5];
-	}
-}
 @end

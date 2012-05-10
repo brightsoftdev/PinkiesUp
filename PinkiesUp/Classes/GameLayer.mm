@@ -31,7 +31,7 @@
 	return scene;
 }
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
 -(id) init {
 	if(!(self=[super init]))
 		return nil;
@@ -99,7 +99,7 @@
     
 }
 
-#pragma mark main function
+#pragma mark - main function
 - (void) update: (ccTime)dt { // delta time
 	
     [topTeam update: dt];
@@ -145,7 +145,7 @@
 	
 }
 
-#pragma mark private functions
+#pragma mark - private functions
 - (void) setupWorld {
     
     // Define the gravity vector.

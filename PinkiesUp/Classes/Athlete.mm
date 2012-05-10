@@ -19,7 +19,7 @@
 
 @synthesize torsoBody, world;
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
 + (id)init {
 	return [[self alloc] init];
 }
@@ -127,14 +127,14 @@
 	[super dealloc];
 }
 
-#pragma mark public functions
+#pragma mark - public functions
 - (void)update :(int)x :(float)velocity {
 	//CGSize s = [CCDirector sharedDirector].winSize;
 	//self.bear.position = ccp(x + s.width/4, self.position.y + s.height/4);
 	//[self setAnimationSpeed:velocity];
 }
 
-#pragma mark private functions
+#pragma mark - private functions
 - (b2Body *) createBodyForSprite: (CCSprite*)sprite {
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
