@@ -11,7 +11,7 @@
 #import "GameManager.h"
 
 @interface Athlete (Private)
-- (b2Body *) createBodyForSprite: (CCSprite*)sprite;
+- (b2Body *) createBoxBodyForSprite: (CCSprite*)sprite density:(float)density friction:(float)friction restiution:(float)restitution;
 @end
 
 
@@ -32,21 +32,23 @@
     
     world = [GameManager sharedGameManager].world;
     
-    float spineLength = 4.0f;
+    float spineLength = sqrtf(pow(10.5,2) + pow(10.5,2))*DEFAULT_HAROLD_SCALE * HAROLD_PIXEL_SCALE / PTM_RATIO;
+    CCLOG(@"spineLength: %f", spineLength);
 	
 	//torso
     torso = [CCSprite spriteWithFile:@"harold_0009_1.png"];
     torso.color = ccc3(170,255,102);
     torso.scale = 0.25f;
-    [self addChild:torso];
-    torsoBody = (b2Body*)[self createBodyForSprite:torso];
+    [self addChild:torso z:0];
+    torsoBody = (b2Body*)[self createBoxBodyForSprite:torso density:1.0f friction:0.8f restiution:0.1f];
     
     //head
     head = [CCSprite spriteWithFile:@"harold_0002_8.png"];
     head.color = ccc3(170,255,102);
     head.scale = 0.25f;
-    head.position = ccp(200,200);
-    [self addChild:head]; //add head to main layer, 
+    head.position = ccpAdd(ccp(10.5*HAROLD_PIXEL_SCALE,10.5*HAROLD_PIXEL_SCALE),
+                           ccp(torso.boundingBox.size.width/2.0f, torso.boundingBox.size.height/2.0f));
+    [self addChild:head z:2]; 
     
     b2Body *headBody;
     b2BodyDef boxBodyDef;
@@ -71,6 +73,7 @@
     
     
     //spine
+    //distance from middle of torso to middle of head = 10.5,10.5
     b2BodyDef bd;
     bd.type = b2_dynamicBody;
     bd.position.Set(spineLength/2.0f + torsoBody->GetPosition().x, spineLength/2.0f + torsoBody->GetPosition().y); 
@@ -138,6 +141,10 @@
     mouth.position = ccp(4.0*HAROLD_PIXEL_SCALE, 3.5*HAROLD_PIXEL_SCALE);
     [head addChild:mouth];
     
+//    //mid-parts
+//    NSString *midParts = @"harold_0008_2.png:harold_0007_3.png:harold_0006_4.png:harold_0005_5.png:harold_0004_6.png:harold_0003_7.png";
+//    [self addMidParts:midParts];
+    
     return self;
 }
 
@@ -154,14 +161,15 @@
 }
 
 #pragma mark private functions
-- (b2Body *) createBodyForSprite: (CCSprite*)sprite {
+- (b2Body *) createBoxBodyForSprite: (CCSprite*)sprite density:(float)density friction:(float)friction restiution:(float)restitution {
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
 
     b2Body *body;
     b2BodyDef boxBodyDef;
     boxBodyDef.type = b2_dynamicBody;
-    boxBodyDef.position.Set(screenSize.width/2/PTM_RATIO, screenSize.height/2/PTM_RATIO); 
+    CGPoint worldPoint = [self convertToWorldSpace:sprite.position];
+    boxBodyDef.position.Set(worldPoint.x/PTM_RATIO, worldPoint.y/PTM_RATIO); 
     boxBodyDef.userData = self;
     boxBodyDef.linearDamping = 0.0f;  //adds air resistance to box
     body = world->CreateBody(&boxBodyDef);
@@ -172,13 +180,28 @@
 	
 	b2FixtureDef fixdef;
 	fixdef.shape = &boxShape;
-	fixdef.density = 1.0f;
-	fixdef.friction = 0.8f;
-	fixdef.restitution = 0.1f;
+	fixdef.density = density;
+	fixdef.friction = friction;
+	fixdef.restitution = restitution;
 	//fixdef.filter.groupIndex = kittyCollisionFilter;
 	body->CreateFixture(&fixdef);
     
     return body;
+}
+
+-(void) addMidParts: (NSString*) midParts {
+    
+    NSArray *partNames = [midParts componentsSeparatedByString:@":"];
+
+    for(int i = 0; i < [partNames count]; ++i) {
+        NSString *filename = [partNames objectAtIndex:i];
+        CCSprite *part = [CCSprite spriteWithFile:filename];
+        part.position = ccpAdd(torso.position, ccp(HAROLD_PIXEL_SCALE*i, HAROLD_PIXEL_SCALE*i));
+        part.scale = DEFAULT_HAROLD_SCALE;
+        [self addChild:part z:1];
+    }
+    
+    
 }
 
 @end
