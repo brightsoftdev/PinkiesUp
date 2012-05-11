@@ -12,5 +12,4 @@ build/
 *.mode2v3
 
 xcuserdata
-
-PinkiesUp.xcodeproj/project.xcworkspace/xcuserdata/jonstokes.xcuserdatad/UserInterfaceState.xcuserstate
+project.xcworkspace
