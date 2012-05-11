@@ -23,6 +23,7 @@
 
 @property (nonatomic, readwrite, retain) ButtonGroup *buttonGroup;
 @property (nonatomic, readwrite, retain) Athlete *athlete;
+@property (nonatomic, assign) BOOL isTop_;
 
 + (id)init :(BOOL)isTop;
 - (id)init :(BOOL)isTop;

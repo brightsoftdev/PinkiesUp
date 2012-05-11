@@ -20,6 +20,8 @@
 		5A7A659F154F8E67004BB850 /* TopButton5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A6595154F8E67004BB850 /* TopButton5.png */; };
 		5AB7C2861558990C00EFDC8D /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB7C2851558990C00EFDC8D /* Line.png */; };
 		5ABC39961559C4EC0085CF11 /* CCSpriteAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC39951559C4EC0085CF11 /* CCSpriteAdd.m */; };
+		68BCD12A155D97890055C7DC /* harold_0003_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BCD129155D97890055C7DC /* harold_0003_8.png */; };
+		68BCD135155D9CA60055C7DC /* AthletePart.mm in Sources */ = {isa = PBXBuildFile; fileRef = 68BCD134155D9CA50055C7DC /* AthletePart.mm */; };
 		68CBA6111549CD0F0032199B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6101549CD0F0032199B /* QuartzCore.framework */; };
 		68CBA6131549CD0F0032199B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6121549CD0F0032199B /* OpenGLES.framework */; };
 		68CBA6151549CD0F0032199B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CBA6141549CD0F0032199B /* OpenAL.framework */; };
@@ -187,7 +189,6 @@
 		68CBA82E1549D0250032199B /* Square.ai in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8261549D0250032199B /* Square.ai */; };
 		68CBA8471549E4960032199B /* harold_0000_eye.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83D1549E4960032199B /* harold_0000_eye.png */; };
 		68CBA8481549E4960032199B /* harold_0001_mouth.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83E1549E4960032199B /* harold_0001_mouth.png */; };
-		68CBA8491549E4960032199B /* harold_0002_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA83F1549E4960032199B /* harold_0002_8.png */; };
 		68CBA84A1549E4960032199B /* harold_0003_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8401549E4960032199B /* harold_0003_7.png */; };
 		68CBA84B1549E4960032199B /* harold_0004_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8411549E4960032199B /* harold_0004_6.png */; };
 		68CBA84C1549E4960032199B /* harold_0005_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CBA8421549E4960032199B /* harold_0005_5.png */; };
@@ -214,6 +215,9 @@
 		5AB7C2851558990C00EFDC8D /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
 		5ABC39941559C4EC0085CF11 /* CCSpriteAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSpriteAdd.h; path = PinkiesUp/CCSpriteAdd.h; sourceTree = SOURCE_ROOT; };
 		5ABC39951559C4EC0085CF11 /* CCSpriteAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSpriteAdd.m; path = PinkiesUp/CCSpriteAdd.m; sourceTree = SOURCE_ROOT; };
+		68BCD129155D97890055C7DC /* harold_0003_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0003_8.png; sourceTree = "<group>"; };
+		68BCD133155D9CA50055C7DC /* AthletePart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AthletePart.h; sourceTree = "<group>"; };
+		68BCD134155D9CA50055C7DC /* AthletePart.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AthletePart.mm; sourceTree = "<group>"; };
 		68CBA60C1549CD0F0032199B /* PinkiesUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinkiesUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68CBA6101549CD0F0032199B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68CBA6121549CD0F0032199B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -549,7 +553,6 @@
 		68CBA8261549D0250032199B /* Square.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Square.ai; sourceTree = "<group>"; };
 		68CBA83D1549E4960032199B /* harold_0000_eye.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0000_eye.png; sourceTree = "<group>"; };
 		68CBA83E1549E4960032199B /* harold_0001_mouth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0001_mouth.png; sourceTree = "<group>"; };
-		68CBA83F1549E4960032199B /* harold_0002_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0002_8.png; sourceTree = "<group>"; };
 		68CBA8401549E4960032199B /* harold_0003_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0003_7.png; sourceTree = "<group>"; };
 		68CBA8411549E4960032199B /* harold_0004_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0004_6.png; sourceTree = "<group>"; };
 		68CBA8421549E4960032199B /* harold_0005_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = harold_0005_5.png; sourceTree = "<group>"; };
@@ -1119,6 +1122,8 @@
 				68CBA8121549CE2E0032199B /* Team.mm */,
 				5A4D20DD154E5B9900B8CE8B /* ReadyScreen.h */,
 				5A4D20DE154E5B9900B8CE8B /* ReadyScreen.mm */,
+				68BCD133155D9CA50055C7DC /* AthletePart.h */,
+				68BCD134155D9CA50055C7DC /* AthletePart.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1151,9 +1156,9 @@
 			children = (
 				68CBA83D1549E4960032199B /* harold_0000_eye.png */,
 				68CBA83E1549E4960032199B /* harold_0001_mouth.png */,
-				68CBA83F1549E4960032199B /* harold_0002_8.png */,
 				68CBA8401549E4960032199B /* harold_0003_7.png */,
 				68CBA8411549E4960032199B /* harold_0004_6.png */,
+				68BCD129155D97890055C7DC /* harold_0003_8.png */,
 				68CBA8421549E4960032199B /* harold_0005_5.png */,
 				68CBA8431549E4960032199B /* harold_0006_4.png */,
 				68CBA8441549E4960032199B /* harold_0007_3.png */,
@@ -1229,7 +1234,6 @@
 				68CBA82E1549D0250032199B /* Square.ai in Resources */,
 				68CBA8471549E4960032199B /* harold_0000_eye.png in Resources */,
 				68CBA8481549E4960032199B /* harold_0001_mouth.png in Resources */,
-				68CBA8491549E4960032199B /* harold_0002_8.png in Resources */,
 				68CBA84A1549E4960032199B /* harold_0003_7.png in Resources */,
 				68CBA84B1549E4960032199B /* harold_0004_6.png in Resources */,
 				68CBA84C1549E4960032199B /* harold_0005_5.png in Resources */,
@@ -1248,6 +1252,7 @@
 				5A7A659E154F8E67004BB850 /* TopButton4.png in Resources */,
 				5A7A659F154F8E67004BB850 /* TopButton5.png in Resources */,
 				5AB7C2861558990C00EFDC8D /* Line.png in Resources */,
+				68BCD12A155D97890055C7DC /* harold_0003_8.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1409,7 @@
 				68CBA85B1549F6430032199B /* GameManager.mm in Sources */,
 				5A4D20DF154E5B9900B8CE8B /* ReadyScreen.mm in Sources */,
 				5ABC39961559C4EC0085CF11 /* CCSpriteAdd.m in Sources */,
+				68BCD135155D9CA60055C7DC /* AthletePart.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

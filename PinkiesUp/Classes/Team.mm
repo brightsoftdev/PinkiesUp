@@ -14,7 +14,7 @@
 
 @implementation Team
 
-@synthesize buttonGroup, athlete;
+@synthesize buttonGroup, athlete, isTop_;
 
 #pragma mark - overridden functions
 + (id)init :(BOOL)isTop {
@@ -41,10 +41,13 @@
 	athlete = [Athlete init];
 	[self addChild:athlete];
 	
-    if(isTop)
+    if(isTop) {
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*3/4.0f/PTM_RATIO), 0);
-    else
+	}
+    else {
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*1/4.0f/PTM_RATIO), 0);
+		
+	}
     
 	return self;
 }

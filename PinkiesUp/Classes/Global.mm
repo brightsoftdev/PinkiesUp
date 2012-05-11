@@ -10,7 +10,7 @@
 
 @implementation Global
 
-static BOOL AUTO_START = NO;
+static BOOL AUTO_START = YES;
 
 + (BOOL)AUTO_START {
 	return AUTO_START;

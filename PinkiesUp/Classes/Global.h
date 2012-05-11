@@ -12,8 +12,8 @@
 #define WORLD_GRAVITY -20.0
 //#define AUTO_START 1 // created static variable to avoid rebuilding
 #define DEBUG_CONTROL 0
-#define DEBUG_DRAW 1
-#define HAROLD_PIXEL_SCALE 29.0
+#define DEBUG_DRAW 0
+#define HAROLD_PIXEL_SCALE 30.0
 #define DEFAULT_HAROLD_SCALE 0.25
 
 

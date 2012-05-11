@@ -10,13 +10,16 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #import "Global.h"
+#import "AthletePart.h"
+#import "Team.h"
 
 /** the main character sprite */
 @interface Athlete : CCNode {
     CCSprite *torso;
     b2Body *torsoBody;
     b2World* world;
-    CCSprite *head;
+    AthletePart *head;
+	NSMutableArray *partSprites;
 }
 
 @property (nonatomic, readwrite) b2World *world;
