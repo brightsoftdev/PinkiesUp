@@ -12,6 +12,11 @@
 @interface Button (Private)
 @property(nonatomic, readwrite) BOOL isPressed;
 @property(nonatomic, readwrite) BOOL isOn;
+/*
+- (void) reset;
+- (void) updateFlash;
+- (void) updateFlash2;
+*/
 @end
 
 @implementation Button
@@ -22,7 +27,12 @@
 @synthesize positionInSequence;
 @synthesize sequenceWasChecked;
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
++ (id)init:(CCTexture2D *)texture :(CGPoint)position :(CGPoint *) vertices {
+	//todo: ignore textures
+	return [[[self alloc] init :texture :texture :texture :position :vertices] autorelease];
+}
+
 + (id)init:(CCTexture2D *)offTexture :(CCTexture2D *)onTexture :(CCTexture2D *)pressedTexture :(CGPoint)position :(CGPoint *)vertices {
     return [[[self alloc] init :offTexture :onTexture :pressedTexture :position :vertices] autorelease];
 }
@@ -36,7 +46,7 @@
 	pressedTexture = _pressedTexture;
 	self.position = position;
 	//NSLog(@"%f, %f, %f, %f", position.x, position.y, self.contentSize.width, self.contentSize.height);
-	//self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2); //todo: remove this when the initWithTexture is removed
+	//self.position = ccp(0 + self.contentSize.width / 2, 0 + self.contentSize.height / 2);
 	self.position = ccp(position.x + self.contentSize.width / 2, position.y - self.contentSize.height / 2); // todo: oops, used top left vertex, instead of bottom left
 	
 	
@@ -49,8 +59,11 @@
 	//self.isOn = NO;
 	self.isPressed = NO;
 	sequenceWasChecked = NO;
+	positionInSequence = -1;
 		  
 	//[self setTexture:_offTexture];
+	//[self setOpacity:255 / 2];
+	[self setColor:(ccc3(0, 0, 0))]; // needed to use CCSpriteAdd
 		
 	return self;
 }
@@ -68,8 +81,8 @@
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    //if (buttonStatus == kButtonStatusDisabled)
-	//	return NO;
+    if (!isEnabled)
+		return NO;
 	
     if (isPressed) // || isOn
 		return NO;
@@ -106,44 +119,65 @@
  }
  */
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    //if (buttonStatus == kButtonStatusDisabled)
-	//	return;
+    if (!isEnabled)
+		return;
 	
 	self.isPressed = NO;
-	self.isOn = !isOn;
+	self.isOn = !isOn; //todo: cannot turn off code goes here
 }
 
 - (void)dealloc {
-    [offTexture release];
+	[offTexture release];
 	[onTexture release];
     [pressedTexture release];
-	//CGPoint vertices[4]; //todo: delete array?
-	//ccColor4F color4f; //todo: delete struct?
     [super dealloc];
 }
 
-#pragma mark public functions
+#pragma mark - public functions
 - (void)flash {
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-	//[self setColor:(ccc3(255, 255, 255))];
-	[self setTexture:pressedTexture];
-	[self schedule:@selector(unflash) interval:0.5];
+	[self schedule:@selector(updateFlash)];
 }
 
-#pragma mark private functions
+#pragma mark - private functions
 - (void) reset {
 	self.isOn = NO;
 	[self setTexture :offTexture];
 	sequenceWasChecked = NO;
 }
 
-- (void) unflash {
-	[self unschedule:@selector(unflash)];
-	//[self setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-	[self setTexture:offTexture];
+- (void) updateFlash {
+	[self setColor:(ccc3([self color].r + 30, [self color].g + 30, [self color].b + 30))];
+	if ([self color].r >= 240) {
+		[self unschedule:@selector(updateFlash)];
+		[self schedule:@selector(updateFlash2)];
+	}
 }
 
-#pragma mark properties
+- (void) updateFlash2 {
+	[self setColor:(ccc3([self color].r - 30, [self color].g - 30, [self color].b - 30))];
+	if ([self color].r == 0) {
+		[self unschedule:@selector(updateFlash2)];
+	}
+}
+
+#pragma mark - public properties
+- (BOOL)isEnabled {
+	return isEnabled;
+}
+
+- (void)setIsEnabled :(BOOL)_isEnabled {
+	if (_isEnabled) {
+		isEnabled = YES;
+		self.isOn = NO;
+	}
+	else {
+		isEnabled = NO;
+		[self setTexture:offTexture];
+		[self setOpacity:255 / 5];
+	}
+}
+
+#pragma mark - private properties
 - (BOOL)isPressed {
 	return isPressed;
 }
@@ -152,11 +186,10 @@
 	if (_isPressed) {
 		isPressed = YES;
 		[self setTexture:pressedTexture];
-		[self setColor:ccc3(0, 0, 255)];
+		[self flash];
 	}
 	else {
 		isPressed = NO;
-		[self setColor:ccWHITE];
 	}
 }
 
@@ -175,22 +208,6 @@
 		[self setTexture:offTexture];
 		[self setOpacity:255 / 2]; //todo: should be in subclass
 	}
-
 }
 
-- (BOOL)isEnabled {
-	return isEnabled;
-}
-
-- (void)setIsEnabled :(BOOL)_isEnabled {
-	if (_isEnabled) {
-		isEnabled = YES;
-		self.isOn = NO;
-	}
-	else {
-		isEnabled = NO;
-		[self setTexture:offTexture];
-		[self setOpacity:255 / 10];
-	}
-}
 @end

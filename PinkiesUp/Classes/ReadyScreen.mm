@@ -26,10 +26,13 @@
 	
 	self.isTouchEnabled = YES;
 	
-	bottomButtonGroup = [ButtonGroup init:0];
-	[self addChild:bottomButtonGroup]; //todo: memory leak?
+	// add buttons
+	NSArray* bottomButtons = [[GameManager sharedGameManager] createButtons:0];
+	bottomButtonGroup = [ButtonGroup initWithButtons:bottomButtons];
+	[self addChild:bottomButtonGroup];
 	
-	topButtonGroup = [ButtonGroup init:1];
+	NSArray* topButtons = [[GameManager sharedGameManager] createButtons:1];
+	topButtonGroup = [ButtonGroup initWithButtons:topButtons];
 	[self addChild:topButtonGroup];
 	
 	// add start button
@@ -47,35 +50,27 @@
 }
 
 - (void)dealloc {
-	//[bottomButtonGroup dealloc]; //todo: fail
-	//[topButtonGroup dealloc];
 	[super dealloc];
 }
 
 - (void)update: (ccTime)dt {
 	// if number of players ready is more than 2v2, show start button
-	if ([bottomButtonGroup numberOfOnButtons] > 1 && [topButtonGroup numberOfOnButtons] > 1) {
+	if ([bottomButtonGroup numberOfOnButtons] > 1 && [topButtonGroup numberOfOnButtons] > 1)
 		[startButton setIsEnabled: YES];
-	}
-	else {
+	else
 		[startButton setIsEnabled: NO];
-	}
 }
 
 - (void)beginGame {
-	// disable buttons that are off
-	//[bottomButtonGroup disableOffButtons];
-	//[topButtonGroup disableOffButtons];
+	// save which buttons are enabled
+	[GameManager sharedGameManager].topEnabledButtons = [topButtonGroup isOnArray];
+	[GameManager sharedGameManager].bottomEnabledButtons = [bottomButtonGroup isOnArray];
 	
-	// pass the buttonGroups using a singleton
-	//GameManager *gameManager = [GameManager sharedGameManager];
-	//gameManager.bottomButtonGroup = bottomButtonGroup; //todo: multiple pointers, bad? copy and retain failed
-	//gameManager.topButtonGroup = topButtonGroup;
+	// reset score
+	[GameManager sharedGameManager].topTeamScore = 0;
+	[GameManager sharedGameManager].bottomTeamScore = 0;
 	
-	//[self dealloc];
-	
-	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]]; //todo: pass in the buttonGroups classes or pass which ones are on (can use child tag)
-	//STOPPED HERE. GameLayere inits fine, but bad access after replacing the scene?
+	[[CCDirector sharedDirector] replaceScene:[GameLayer scene]];
 }
 
 @end

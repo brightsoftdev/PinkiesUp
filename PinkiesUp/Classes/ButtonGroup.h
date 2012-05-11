@@ -7,24 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h";
+#import "cocos2d.h"
+
+@class Button;
 
 /** contains buttons and group functions */
 @interface ButtonGroup : CCNode {
 	//NSMutableArray *buttonsArray;
 	//BOOL isJumping;
 	int currentSequencePosition;
-	NSMutableArray *currentSequence;
+	//NSMutableArray *currentSequence;
 }
 
-+ (id)init :(BOOL)isTop;
-- (id)init :(BOOL)isTop;
++ (id)init;
++ (id)initWithButtons :(NSArray*)buttons;
+- (id)init;
+- (id)initWithButtons :(NSArray*)buttons;
 - (void)dealloc;
+- (void)addButton :(Button*)button;
+- (void)addButtons :(NSArray*)buttons;
 /** returns 1 upon successful sequence, 0 upon failed sequence, and -1 otherwise */
 - (int)update;
 - (void)reset;
 //- (void)flashSequence;
-- (BOOL)isPressed;
+//- (BOOL)isPressed;
 - (int)numberOfOnButtons;
-- (void)disableOffButtons;
+- (int)numberOfEnabledButtons;
+- (BOOL*)isOnArray;
+- (void)setIsEnabled :(BOOL)IsEnabled;
+- (void)setIsEnabledWithArray :(BOOL*)IsEnabledArray;
+- (void)setLinearSequence :(BOOL)isInReverse;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h";
+#import "cocos2d.h"
 
 /** static class that holds common variables and functions */ //todo: should make a C++ library, should actually make a library in Xcode
 @interface Library : NSObject {

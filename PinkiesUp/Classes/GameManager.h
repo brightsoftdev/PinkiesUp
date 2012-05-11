@@ -13,18 +13,20 @@
 @class ButtonGroup;
 
 @interface GameManager : NSObject {
-    
 	b2World *world;
     CGSize screenSize;
-	ButtonGroup *bottomButtonGroup;
-	ButtonGroup *topButtonGroup;
+	BOOL *topEnabledButtons;
+	BOOL *bottomEnabledButtons;
 }
 
 @property (readwrite) b2World *world;
 @property (nonatomic, readwrite) CGSize screenSize;
-@property (nonatomic, readwrite, retain) ButtonGroup *bottomButtonGroup;
-@property (nonatomic, readwrite, retain) ButtonGroup *topButtonGroup;
+@property (nonatomic, readwrite) BOOL *topEnabledButtons;
+@property (nonatomic, readwrite) BOOL *bottomEnabledButtons;
+@property (nonatomic, readwrite) int topTeamScore;
+@property (nonatomic, readwrite) int bottomTeamScore;
 
-+(GameManager*)sharedGameManager;                                  
-
++ (GameManager*)sharedGameManager;
+/* i didn't know where else to put this */
+- (NSArray*)createButtons :(BOOL)isTop;
 @end

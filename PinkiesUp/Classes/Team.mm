@@ -14,13 +14,9 @@
 
 @implementation Team
 
-@synthesize athlete;
+@synthesize buttonGroup, athlete;
 
-//todo: temp
-float velocity = 0;
-float friction = .99;
-float x = 0; // x value of position //todo: should probably use a distance unit
-
+#pragma mark - overridden functions
 + (id)init :(BOOL)isTop {
 	return [[self alloc] init :isTop];
 }
@@ -29,20 +25,21 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	if (!(self = [super init]))
 		return nil;
 	
-	//GameManager *gameManager = [GameManager sharedGameManager];
+	isTop_ = isTop;
 	
-	//if (gameManager.topButtonGroup == NULL || gameManager.bottomButtonGroup == NULL) {
-	//	NSLog(@"shit");
-	//}
+	GameManager *gameManager = [GameManager sharedGameManager];
+	CGSize screenSize = gameManager.screenSize;
 	
-	//buttonGroup = isTop ? [GameManager sharedGameManager].topButtonGroup : [GameManager sharedGameManager].bottomButtonGroup;
-	buttonGroup = [ButtonGroup init:isTop];
+	// add buttons
+	NSArray* buttons = [[GameManager sharedGameManager] createButtons:isTop];
+	buttonGroup = [ButtonGroup initWithButtons:buttons];
+	isTop ? [buttonGroup setIsEnabledWithArray:gameManager.topEnabledButtons] : [buttonGroup setIsEnabledWithArray:gameManager.bottomEnabledButtons];
+	[buttonGroup setLinearSequence:isTop];
 	[self addChild:buttonGroup];
 	
+	// add athlete
 	athlete = [Athlete init];
 	[self addChild:athlete];
-    
-    CGSize screenSize = [GameManager sharedGameManager].screenSize;
 	
     if(isTop)
         athlete.torsoBody->SetTransform(b2Vec2(screenSize.width/8.0f/PTM_RATIO, screenSize.height*3/4.0f/PTM_RATIO), 0);
@@ -58,8 +55,9 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	[super dealloc];
 }
 
+#pragma mark - public functions
 - (void)update :(float)dt {
-	//when a sequence is successful or failed, update velocity
+	//when a sequence is completed successfully or failed, update velocity
 	//update athlete animation based on new velocity
 	//update player icon, using distance continuously, based on velocity
 	
@@ -73,4 +71,15 @@ float x = 0; // x value of position //todo: should probably use a distance unit
 	}
     
 }
+
+#pragma mark - private functions
+- (void)setIsEnabled :(BOOL)isEnabled {
+	GameManager *gameManager = [GameManager sharedGameManager];
+	
+	if (isEnabled)
+		isTop_ ? [buttonGroup setIsEnabledWithArray:gameManager.topEnabledButtons] : [buttonGroup setIsEnabledWithArray:gameManager.bottomEnabledButtons];
+	else
+		[buttonGroup setIsEnabled:NO];
+}
+
 @end

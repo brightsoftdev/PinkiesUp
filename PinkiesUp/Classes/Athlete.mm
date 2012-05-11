@@ -9,17 +9,17 @@
 #import "Athlete.h"
 #import "Global.h"
 #import "GameManager.h"
-
+/*
 @interface Athlete (Private)
 - (b2Body *) createBoxBodyForSprite: (CCSprite*)sprite density:(float)density friction:(float)friction restiution:(float)restitution;
 @end
-
+*/
 
 @implementation Athlete
 
-@synthesize torsoBody;
+@synthesize torsoBody, world;
 
-#pragma mark overridden functions
+#pragma mark - overridden functions
 + (id)init {
 	return [[self alloc] init];
 }
@@ -28,7 +28,7 @@
     if(!(self = [super init]))
 		return nil;
     
-    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    //CGSize screenSize = [CCDirector sharedDirector].winSize;
     
     world = [GameManager sharedGameManager].world;
     
@@ -149,11 +149,10 @@
 }
 
 - (void)dealloc {
-	//todo: are you supposed to dealloc box2d classes?
 	[super dealloc];
 }
 
-#pragma mark public functions
+#pragma mark - public functions
 - (void)update :(int)x :(float)velocity {
 	//CGSize s = [CCDirector sharedDirector].winSize;
 	//self.bear.position = ccp(x + s.width/4, self.position.y + s.height/4);
@@ -162,6 +161,8 @@
 
 #pragma mark private functions
 - (b2Body *) createBoxBodyForSprite: (CCSprite*)sprite density:(float)density friction:(float)friction restiution:(float)restitution {
+//#pragma mark - private functions
+//- (b2Body *) createBodyForSprite: (CCSprite*)sprite {
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
 

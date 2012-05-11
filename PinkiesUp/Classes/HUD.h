@@ -11,17 +11,17 @@
 
 /** This class should display the same data for all devices */
 @interface HUD : CCNode { // todo: should use CCLayer
-	CCLabelTTF *scoreLabel;
+	//CCLabelTTF *scoreLabel;
 	CCSprite *playerIconTop;
 	CCSprite *playerIconBottom;
 }
 
-@property (nonatomic, readwrite) int score;
+//@property (nonatomic, readwrite) int score;
 
 + (id)init;
 - (id)init;
 - (void)update :(int)x;
-- (int)score;
-- (void)setScore :(int)integer;
+//- (int)score;
+//- (void)setScore :(int)integer;
 	
 @end

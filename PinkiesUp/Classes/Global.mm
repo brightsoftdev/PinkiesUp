@@ -10,14 +10,10 @@
 
 @implementation Global
 
-static float velocity = 0;
+static BOOL AUTO_START = NO;
 
-+ (float)velocity {
-	return velocity;
-}
-
-+ (void)setVelocity:(float)v {
-	velocity = v;
++ (BOOL)AUTO_START {
+	return AUTO_START;
 }
 
 + (id)alloc {

@@ -10,7 +10,7 @@
 
 #define PTM_RATIO 32
 #define WORLD_GRAVITY -20.0
-#define AUTO_START 1
+//#define AUTO_START 1 // created static variable to avoid rebuilding
 #define DEBUG_CONTROL 0
 #define DEBUG_DRAW 1
 #define HAROLD_PIXEL_SCALE 29.0
@@ -24,8 +24,7 @@
 
 }
 
-+ (float)velocity;
-+ (void)setVelocity:(float)v;
++ (BOOL)AUTO_START;
 
 @end
 
