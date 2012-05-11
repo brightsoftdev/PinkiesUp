@@ -62,7 +62,7 @@
 }
 
 - (void)beginGame {
-	// save which buttons are enabled
+	// save which buttons to enable
 	[GameManager sharedGameManager].topEnabledButtons = [topButtonGroup isOnArray];
 	[GameManager sharedGameManager].bottomEnabledButtons = [bottomButtonGroup isOnArray];
 	
