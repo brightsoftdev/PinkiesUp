@@ -162,6 +162,7 @@ static GameManager* _sharedGameManager = nil;
 							  :isTop ? topPositions[i] : bottomPositions[i]
 							  :isTop ? topVertices[i] : bottomVertices[i]];
 		button.tag = i;
+		button.canTurnOff = NO;
 		[buttons addObject:button];
 	}
 	

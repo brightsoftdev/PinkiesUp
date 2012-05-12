@@ -18,11 +18,13 @@
 	BOOL isPressed;
 	BOOL isOn;
 	BOOL isEnabled;
+	BOOL canTurnOff;
 }
 
 @property(nonatomic, readonly) BOOL isPressed;
 @property(nonatomic, readonly) BOOL isOn;
 @property(nonatomic, readwrite) BOOL isEnabled;
+@property(nonatomic, readwrite) BOOL canTurnOff;
 @property(nonatomic, readwrite) int positionInSequence; //todo: should create a new class that inherits Button
 @property(nonatomic, readwrite) BOOL sequenceWasChecked;
 

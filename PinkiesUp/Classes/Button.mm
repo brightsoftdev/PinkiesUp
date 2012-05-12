@@ -21,11 +21,8 @@
 
 @implementation Button
 
-@dynamic isPressed;
-@dynamic isOn;
-@dynamic isEnabled;
-@synthesize positionInSequence;
-@synthesize sequenceWasChecked;
+@dynamic isPressed, isOn, isEnabled;
+@synthesize canTurnOff, positionInSequence, sequenceWasChecked;
 
 #pragma mark - overridden functions
 + (id)init:(CCTexture2D *)texture :(CGPoint)position :(CGPoint *) vertices {
@@ -58,6 +55,7 @@
 	self.isEnabled = YES;
 	//self.isOn = NO;
 	self.isPressed = NO;
+	self.canTurnOff = YES;
 	sequenceWasChecked = NO;
 	positionInSequence = -1;
 		  
@@ -123,7 +121,7 @@
 		return;
 	
 	self.isPressed = NO;
-	self.isOn = !isOn; //todo: cannot turn off code goes here
+	self.isOn = canTurnOff ? !isOn : YES;
 }
 
 - (void)dealloc {
